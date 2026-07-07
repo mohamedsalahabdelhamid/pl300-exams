@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PL-300 Exam Center</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div>
+      <h1>&#x1F4CA; PL-300 Exam Center</h1>
+      <div class="header-sub">6 Practice Exams &bull; 369 Questions &bull; Microsoft Power BI Data Analyst</div>
+    </div>
+  </div>
+  <div class="dashboard" id="app">
+    <h2>Select an Exam</h2>
+    <div class="exam-grid" id="examGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:#8a8886">Loading exams...</div>
+    </div>
+  </div>
+</div>
+<script>
+fetch('/api/exams').then(r => {
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}).then(d => {
+  if (d && d.exam_sizes) render(d.exam_sizes);
+  else render();
+}).catch(e => {
+  document.getElementById('examGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#d13438">&#x274C; Failed to load exams<br><button class="btn btn-primary" onclick="location.reload()" style="margin-top:10px">Retry</button></div>';
+});
+
+function getStatus(examId) {
+  const key = 'pl300_exam_' + examId;
+  const saved = localStorage.getItem(key);
+  if (!saved) return { state: 'not_started' };
+  try { return JSON.parse(saved); }
+  catch(e) { return { state: 'not_started' }; }
+}
+
+function examCard(id, size) {
+  const status = getStatus(id);
+  const pct = status.state === 'completed' ? Math.round(status.correct / status.total * 100) : 0;
+  const badge = status.state === 'completed' ? '&#x2705; Completed' :
+                status.state === 'in_progress' ? '&#x1F7E1; In Progress' :
+                '&#x1F534; Not Started';
+  const badgeClass = status.state === 'completed' ? 'badge-ok' :
+                     status.state === 'in_progress' ? 'badge-progress' :
+                     'badge-idle';
+  const btnText = status.state === 'completed' ? '&#x1F504; Retake Exam' :
+                  status.state === 'in_progress' ? '&#x25B6; Resume' :
+                  '&#x1F4DD; Start Exam';
+  const infoText = status.state === 'completed' ? status.correct + '/' + status.total + ' (' + pct + '%)' +
+                   (status.date ? ' &middot; ' + status.date : '') :
+                   status.state === 'in_progress' ? 'Question ' + (status.currentQ + 1) + ' of ' + size :
+                   size + ' questions &middot; 100 min';
+
+  return '<div class="exam-card" onclick="openExam(' + id + ')">' +
+    '<div class="card-header"><span class="exam-num">Exam ' + id + '</span><span class="' + badgeClass + '">' + badge + '</span></div>' +
+    '<div class="card-info">' + infoText + '</div>' +
+    (status.state === 'completed' && pct >= 70 ? '<div class="card-result pass">&#x2705; Passed</div>' : '') +
+    (status.state === 'completed' && pct < 70 ? '<div class="card-result fail">&#x274C; Needs Review</div>' : '') +
+    '<div class="card-action"><button class="btn btn-primary">' + btnText + '</button></div>' +
+    '</div>';
+}
+
+function openExam(id) {
+  window.location.href = '/exam/' + id;
+}
+
+function render(sizes) {
+  if (!sizes) sizes = [0, 0, 0, 0, 0, 0];
+  const grid = document.getElementById('examGrid');
+  let h = '';
+  for (let i = 0; i < 6; i++) {
+    h += examCard(i + 1, sizes[i]);
+  }
+  grid.innerHTML = h;
+}
+</script>
+</body>
+</html>

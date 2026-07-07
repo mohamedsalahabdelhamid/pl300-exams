@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam {{ exam_id }} — PL-300 Practice</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container" id="app">
+  <div class="header">
+    <div>
+      <h1>Exam {{ exam_id }} <span class="header-light">of 6</span></h1>
+      <div class="q-counter" id="qCounter">0 questions</div>
+    </div>
+    <div class="timer" id="timer">00:00</div>
+  </div>
+  <div class="stats-bar">
+    <div class="progress">
+      <span id="pLabel">0 / 0</span>
+      <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
+    </div>
+    <div>
+      <button class="btn btn-sm btn-secondary" onclick="goBack()">&larr; Back to Exams</button>
+      <button class="btn btn-sm btn-secondary" onclick="resetExam()">&#x21BB; Reset</button>
+    </div>
+  </div>
+  <div id="loadMsg" class="load-wrap">
+    <div class="load-spinner"></div>
+    <div class="load-text">Loading exam questions...</div>
+  </div>
+  <div id="examBody" class="hidden">
+    <div class="question-area" id="qArea"></div>
+    <div class="nav">
+      <button class="btn btn-secondary" id="prevBtn" onclick="prevQ()">&larr; Previous</button>
+      <button class="btn btn-info" id="checkBtn" onclick="checkAnswer()">&#x1F50D; Check Answer</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQ()">Next &rarr;</button>
+      <button class="btn btn-success hidden" id="subBtn" onclick="submitExam()">Submit Exam</button>
+    </div>
+    <div id="feedbackArea" class="feedback hidden"></div>
+  </div>
+  <div id="resultSec" class="rs hidden"></div>
+</div>
+<script>
+// ---- Settings ----
+const EXAM_ID = {{ exam_id }};
+const STORAGE_KEY = 'pl300_exam_' + EXAM_ID;
+const EXAM_MINUTES = 100;
+const EXAM_SECONDS = EXAM_MINUTES * 60;
+
+// ---- State ----
+var questions = [];
+var cur = 0;
+var answers = [];
+var ddOrders = [];
+var tSec = EXAM_SECONDS;
+var tInt = null;
+var examLoaded = false;
+
+// ---- Corrections Override ----
+var corrections = {};
+
+fetch('/data/corrections.json')
+  .then(r => r.json())
+  .then(d => { corrections = d || {}; })
+  .catch(function() { corrections = {}; });
+
+// ---- Load Questions ----
+var loadError = document.getElementById('loadError');
+fetch('/api/questions?exam=' + EXAM_ID)
+  .then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
+  .then(d => {
+    if (!d.questions || !d.questions.length) throw new Error('No questions found');
+    questions = d.questions;
+    answers = new Array(questions.length).fill(null);
+    ddOrders = new Array(questions.length).fill(null);
+    loadSaved();
+    updateCounter();
+    startTimer();
+    render(0);
+    examLoaded = true;
+    document.getElementById('examBody').classList.remove('hidden');
+    document.getElementById('loadMsg').classList.add('hidden');
+  })
+  .catch(e => {
+    document.getElementById('loadMsg').innerHTML = '<div class="load-error">&#x274C; Failed to load exam: ' + escHtml(e.message) + '<br><button class="btn btn-primary" onclick="location.reload()">Retry</button></div>';
+    document.getElementById('loadMsg').classList.remove('hidden');
+  });
+
+// ---- Save/Load ----
+function save() {
+  const data = {
+    state: 'in_progress',
+    currentQ: cur,
+    answers: answers,
+    ddOrders: ddOrders,
+    tSec: tSec,
+    date: new Date().toLocaleDateString('en-US')
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function loadSaved() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+  try {
+    const data = JSON.parse(raw);
+    if (data.state === 'completed') return;
+    answers = data.answers || new Array(questions.length).fill(null);
+    ddOrders = data.ddOrders || new Array(questions.length).fill(null);
+    cur = data.currentQ || 0;
+    tSec = data.tSec || EXAM_SECONDS;
+    document.getElementById('timer').textContent = fmt(tSec);
+  } catch(e) {}
+}
+
+function markCompleted(correct, total) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    state: 'completed',
+    correct: correct,
+    total: total,
+    currentQ: cur,
+    answers: answers,
+    date: new Date().toLocaleDateString('en-US')
+  }));
+}
+
+// ---- Timer ----
+function startTimer() {
+  if (tInt) return;
+  tInt = setInterval(function() {
+    tSec--;
+    if (tSec < 0) { tSec = 0; submitExam(); return; }
+    var tEl = document.getElementById('timer');
+    tEl.textContent = fmt(tSec);
+    if (tSec <= 60) tEl.className = 'timer danger';
+    else if (tSec <= 300) tEl.className = 'timer warning';
+    else tEl.className = 'timer';
+    if (examLoaded) save();
+  }, 1000);
+}
+
+function fmt(s) {
+  if (s > EXAM_SECONDS) s = EXAM_SECONDS;
+  var m = String(Math.floor(s / 60)).padStart(2, '0');
+  var sc = String(s % 60).padStart(2, '0');
+  return m + ':' + sc;
+}
+
+// ---- Render ----
+function render(idx) {
+  var q = questions[idx];
+  var a = document.getElementById('qArea');
+  if (!a || !q) return;
+  var h = '<div class="qnum">Question ' + (idx + 1) + ' of ' + questions.length + '</div>';
+  h += '<div class="qtext">' + escHtml(q.q) + '</div>';
+  if (q.imgs && q.imgs.length > 0) {
+    for (var i = 0; i < q.imgs.length; i++) {
+      h += '<img class="qimg" src="/images/' + q.imgs[i] + '" alt="Question image" onclick="window.open(this.src)">';
+    }
+  }
+  if (q.t === 'dd' && q.dd) {
+    h += renderDD(idx, q);
+  } else if (q.o && q.o.length > 0) {
+    h += '<div class="options">';
+    var isMulti = (q.t === 'hs' && q.a && q.a.length > 1);
+    if (isMulti) {
+      for (var i = 0; i < q.o.length; i++) {
+        var l = String.fromCharCode(65 + i);
+        var ck = answers[idx] && answers[idx].indexOf(l) >= 0 ? 'checked' : '';
+        h += '<label class="opt' + (ck ? ' sel' : '') + '"><input type="checkbox" name="q' + idx + '" value="' + l + '" ' + ck + ' onchange="cbSel(' + idx + ')"><span>' + escHtml(q.o[i]) + '</span></label>';
+      }
+    } else {
+      for (var i = 0; i < q.o.length; i++) {
+        var l = String.fromCharCode(65 + i);
+        var ck = answers[idx] === l ? 'checked' : '';
+        var sc = ck ? ' sel' : '';
+        h += '<label class="opt' + sc + '"><input type="radio" name="q' + idx + '" value="' + l + '" ' + ck + ' onchange="sel(' + idx + ",'" + l + "')" + '"><span>' + escHtml(q.o[i]) + '</span></label>';
+      }
+    }
+    h += '</div>';
+  } else {
+    h += '<div class="no-opts">This question requires selecting from a visual. Check the correct option, then review the explanation after submission.</div>';
+  }
+  a.innerHTML = h;
+  document.getElementById('feedbackArea').classList.add('hidden');
+  document.getElementById('feedbackArea').innerHTML = '';
+  navUpd();
+  progUpd();
+}
+
+function renderDD(idx, q) {
+  var order = ddOrders[idx] || shuffleArray([].concat(q.dd));
+  if (!ddOrders[idx]) ddOrders[idx] = order;
+  var h = '<div class="options dd-options">';
+  for (var i = 0; i < order.length; i++) {
+    h += '<div class="dd-row">';
+    h += '<div class="dd-rank">' + (i + 1) + '</div>';
+    h += '<div class="dd-text">' + escHtml(order[i]) + '</div>';
+    h += '<button class="dd-up" onclick="ddMove(' + idx + ',' + i + ',-1)" ' + (i === 0 ? 'disabled' : '') + '>&#x25B2;</button>';
+    h += '<button class="dd-down" onclick="ddMove(' + idx + ',' + i + ',1)" ' + (i === order.length - 1 ? 'disabled' : '') + '>&#x25BC;</button>';
+    h += '</div>';
+  }
+  h += '</div>';
+  h += '<div class="dd-help">Use the arrows to arrange the items in the correct order.</div>';
+  return h;
+}
+
+function shuffleArray(a) {
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function ddMove(idx, i, dir) {
+  var order = ddOrders[idx];
+  if (!order) return;
+  var j = i + dir;
+  if (j < 0 || j >= order.length) return;
+  var t = order[i]; order[i] = order[j]; order[j] = t;
+  ddOrders[idx] = order;
+  render(idx);
+  save();
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function sel(i, v) {
+  answers[i] = v;
+  document.querySelectorAll('.opt').forEach(function(e) { e.classList.remove('sel'); });
+  var c = document.querySelector('input[name="q' + i + '"]:checked');
+  if (c) c.closest('.opt').classList.add('sel');
+  save();
+}
+
+function cbSel(idx) {
+  var ch = document.querySelectorAll('input[name="q' + idx + '"]:checked');
+  var v = '';
+  for (var i = 0; i < ch.length; i++) v += ch[i].value;
+  answers[idx] = v;
+  document.querySelectorAll('.opt').forEach(function(e) { e.classList.remove('sel'); });
+  ch.forEach(function(c) { c.closest('.opt').classList.add('sel'); });
+  save();
+}
+
+function nextQ() {
+  if (cur < questions.length - 1) { cur++; render(cur); save(); }
+}
+
+function prevQ() {
+  if (cur > 0) { cur--; render(cur); save(); }
+}
+
+function navUpd() {
+  document.getElementById('prevBtn').disabled = cur === 0;
+  if (cur === questions.length - 1) {
+    document.getElementById('nextBtn').classList.add('hidden');
+    document.getElementById('subBtn').classList.remove('hidden');
+  } else {
+    document.getElementById('nextBtn').classList.remove('hidden');
+    document.getElementById('subBtn').classList.add('hidden');
+  }
+}
+
+function progUpd() {
+  var n = 0;
+  for (var i = 0; i < answers.length; i++) {
+    if (answers[i] !== null || ddOrders[i] !== null) n++;
+  }
+  document.getElementById('pLabel').textContent = n + ' / ' + questions.length;
+  document.getElementById('pFill').style.width = (n / questions.length * 100) + '%';
+}
+
+function updateCounter() {
+  if (questions.length) {
+    document.getElementById('qCounter').textContent = questions.length + ' questions';
+  }
+}
+
+function goBack() {
+  window.location.href = '/';
+}
+
+function resetExam() {
+  if (!confirm('Are you sure you want to reset this exam? All your answers will be erased.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  answers = new Array(questions.length).fill(null);
+  ddOrders = new Array(questions.length).fill(null);
+  cur = 0;
+  tSec = EXAM_SECONDS;
+  document.getElementById('timer').textContent = fmt(tSec);
+  document.getElementById('timer').className = 'timer';
+  render(0);
+  save();
+}
+
+function checkAnswer() {
+  var idx = cur;
+  var q = questions[idx];
+  var u = getUserAnswer(idx);
+  if (!u) {
+    document.getElementById('feedbackArea').innerHTML = '<div class="fb fb-hint">Please select an answer first.</div>';
+    document.getElementById('feedbackArea').classList.remove('hidden');
+    return;
+  }
+  var c = isAnswerCorrect(q, u, idx);
+  var icon = c ? '&#x2705;' : '&#x274C;';
+  var label = c ? 'Correct!' : 'Incorrect';
+  var cls = c ? 'fb fb-ok' : 'fb fb-ko';
+  var ca = formatCorrectAnswer(q, idx);
+  var h = '<div class="' + cls + '">';
+  h += '<div class="fb-head">' + icon + ' <strong>' + label + '</strong></div>';
+  var expl = q.answer_explanation || q.e || '';
+  if (!c) {
+    h += '<div class="fb-correct"><strong>Correct answer:</strong> ' + escHtml(ca) + '</div>';
+    if (expl) h += '<div class="fb-explain"><strong>Why this is correct:</strong><br>' + escHtml(expl) + '</div>';
+    h += '<div class="fb-your"><strong>Your answer:</strong> ' + escHtml(formatUserAnswer(q, u)) + '</div>';
+  } else {
+    if (expl) h += '<div class="fb-explain"><strong>Explanation:</strong><br>' + escHtml(expl) + '</div>';
+  }
+  h += '</div>';
+  document.getElementById('feedbackArea').innerHTML = h;
+  document.getElementById('feedbackArea').classList.remove('hidden');
+}
+
+function getUserAnswer(i) {
+  var q = questions[i];
+  if (q.t === 'dd' && q.dd) {
+    var order = ddOrders[i];
+    return order ? order.join(' | ') : '';
+  }
+  return answers[i] || '';
+}
+
+function getRealAnswer(q, idx) {
+  var key = EXAM_ID + '_' + (idx + 1);
+  return corrections[key] || q.a || '';
+}
+
+function isAnswerCorrect(q, u, idx) {
+  if (q.t === 'dd' && q.dd) {
+    return u.toUpperCase() === q.dd.join(' | ').toUpperCase();
+  }
+  var realA = getRealAnswer(q, idx);
+  if (realA && realA.length > 1 && /^[A-Z]{2,}$/.test(realA)) {
+    var ua = (u || '').toUpperCase().split('').sort().join('');
+    var ca = realA.toUpperCase().split('').sort().join('');
+    return ua === ca;
+  }
+  return u.toUpperCase() === realA.toUpperCase();
+}
+
+function formatUserAnswer(q, u) {
+  if (!u) return '(No answer)';
+  if (q.t === 'dd' && q.dd) return u;
+  // Convert letter(s) to option text
+  var parts = [];
+  for (var i = 0; i < u.length; i++) {
+    var idx = u.charCodeAt(i) - 65;
+    if (q.o && q.o[idx]) parts.push(q.o[idx]);
+    else parts.push(u[i]);
+  }
+  return parts.join(', ');
+}
+
+function formatCorrectAnswer(q, idx) {
+  if (q.t === 'dd' && q.dd) return q.dd.join(' → ');
+  var realA = getRealAnswer(q, idx !== undefined ? idx : cur);
+  if (realA && realA.length > 1 && /^[A-Z]{2,}$/.test(realA)) {
+    var parts = [];
+    for (var i = 0; i < realA.length; i++) {
+      var li = realA.charCodeAt(i) - 65;
+      if (q.o && q.o[li]) parts.push(q.o[li]);
+      else parts.push(realA[i]);
+    }
+    return parts.join(', ');
+  }
+  if (realA && realA.length === 1) {
+    var li = realA.charCodeAt(0) - 65;
+    if (q.o && q.o[li]) return realA + '. ' + q.o[li];
+    return realA;
+  }
+  return realA || '';
+}
+
+function submitExam() {
+  clearInterval(tInt);
+  var tot = questions.length;
+  var ok = 0;
+  var res = [];
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var u = getUserAnswer(i);
+    var c = isAnswerCorrect(q, u, i);
+    if (c) ok++;
+    res.push({ u: u, c: c });
+  }
+  var pct = Math.round(ok / tot * 100);
+  markCompleted(ok, tot);
+
+  var h = '<div class="rh">';
+  h += '<div class="rscore">' + ok + ' / ' + tot + '</div>';
+  h += '<div class="rdetail">' + ok + ' correct out of ' + tot + ' (' + pct + '%)</div>';
+  h += '<div class="rtime">Time used: ' + fmt(EXAM_SECONDS - tSec) + '</div>';
+  if (pct >= 70) h += '<div class="rverdict pass">&#x2705; Passed</div>';
+  else h += '<div class="rverdict fail">&#x274C; Needs Review</div>';
+  h += '</div>';
+  h += '<div style="text-align:center;margin-bottom:20px">';
+  h += '<button class="btn btn-primary" onclick="goBack()">&larr; Back to Dashboard</button>';
+  h += ' <button class="btn btn-secondary" onclick="resetExam();document.getElementById(\'resultSec\').classList.add(\'hidden\');document.getElementById(\'examBody\').classList.remove(\'hidden\')">&#x21BB; Retake Exam</button>';
+  h += '</div>';
+  h += '<div class="rqs">';
+
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var r = res[i];
+    var ua = formatUserAnswer(q, r.u);
+    var cls = r.c ? 'ok' : 'ko';
+    var icon = r.c ? '&#x2705;' : '&#x274C;';
+    var stxt = r.c ? 'Correct' : 'Incorrect';
+    var ca = formatCorrectAnswer(q, i);
+    h += '<div class="rq ' + cls + '">';
+    h += '<div class="rqh"><span class="rqn">' + icon + ' Question ' + (i + 1) + '</span><span class="rqs2 ' + cls + '">' + stxt + '</span></div>';
+    h += '<div class="rqt">' + escHtml(q.q) + '</div>';
+    if (q.imgs && q.imgs.length > 0) {
+      for (var j = 0; j < q.imgs.length; j++) {
+        h += '<img class="qimg" src="/images/' + q.imgs[j] + '" alt="Question image">';
+      }
+    }
+    h += '<div class="rqans ' + cls + '"><strong>Your answer:</strong> ' + escHtml(ua) + '</div>';
+    if (!r.c && ca) {
+      h += '<div class="rqcorrect"><strong>Correct answer:</strong> ' + escHtml(ca) + '</div>';
+    }
+    var expl = q.answer_explanation || q.e || '';
+    if (expl) {
+      if (!r.c) {
+        expl = 'Why this answer is correct:\n\n' + expl;
+      } else {
+        expl = 'Explanation:\n\n' + expl;
+      }
+      h += '<div class="rqexpl"><strong>Details:</strong><br>' + escHtml(expl) + '</div>';
+    }
+    h += '</div>';
+  }
+
+  h += '</div>';
+  document.getElementById('examBody').classList.add('hidden');
+  document.getElementById('resultSec').innerHTML = h;
+  document.getElementById('resultSec').classList.remove('hidden');
+}
+</script>
+</body>
+</html>

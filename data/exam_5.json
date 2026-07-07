@@ -1,0 +1,770 @@
+{
+  "exam": 5,
+  "total": 61,
+  "exam_minutes": 100,
+  "questions": [
+    {
+      "q": "You have a folder with 100 CSV files. You need to make file metadata available as a dataset without storing the actual CSV data. What three actions should you perform in sequence?",
+      "a": "Get data and select folder,Remove the Content column,Expand the attributes column",
+      "o": [],
+      "dd": [
+        "Get data and select folder",
+        "Remove the Content column",
+        "Expand the attributes column",
+        "Combine files",
+        "Filter by file extension",
+        "Promote headers"
+      ],
+      "t": "dd",
+      "answer_explanation": "Connect to the folder, remove the Content column (which holds file data), then expand the Attribute column to access metadata."
+    },
+    {
+      "q": "You have a Microsoft Fabric eventhouse (Eventhouse1) containing high-velocity, high-volume IoT device data. It can be queried in near-real-time.\n\nYou plan to create a Power BI report with both historical and live data.\n\n─ REQUIREMENTS ─\nConnect to Eventhouse1 while minimizing development effort.",
+      "o": [
+        "Build a composite model.",
+        "Use DirectQuery connectivity mode.",
+        "Use Import connectivity mode.",
+        "Use LiveConnect mode."
+      ],
+      "a": "A",
+      "e": "A composite model allows combining DirectQuery for live data with Import for historical data. This enables both real-time and historical analysis from a single source with minimal development effort. DirectQuery alone would not handle historical data efficiently for high-volume sources.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You need to create a calculated date table that includes all dates from January 1, 2020 to today. Which DAX expression creates this table with dynamic end date?",
+      "a": "C",
+      "o": [
+        "CALENDAR(DATE(2020,1,1), TODAY())",
+        "CALENDARAUTO()",
+        "CALENDAR(DATE(2020,1,1), TODAY())",
+        "ADDCOLUMNS(CALENDAR(DATE(2020,1,1), TODAY()), ...)"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "CALENDAR with start date and TODAY() as end date dynamically extends the date table through the current date."
+    },
+    {
+      "q": "You need to create a set of common time intelligence calculations (YTD, QTD, MTD, YoY%) that users can apply to any measure in the model. What should you create?",
+      "a": "C",
+      "o": [
+        "Calculated columns",
+        "Measure table",
+        "Calculation group",
+        "Field parameter"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Calculation groups in Tabular Editor allow defining reusable calculation items that apply to any measure."
+    },
+    {
+      "q": "You have a Power BI report with a visual showing gross sales by date with anomaly detection enabled. No anomalies are detected.\n\nYou need to increase the likelihood of detecting anomalies.\n\nWhat should you do?",
+      "o": [
+        "Increase the Expected range transparency setting.",
+        "Add a data field to the Legend field well.",
+        "Increase the Sensitivity setting.",
+        "Add a data field to the Secondary values field well."
+      ],
+      "a": "C",
+      "e": "Increasing the Sensitivity setting makes the algorithm more sensitive to changes, marking even slight deviations as anomalies. Decreasing sensitivity makes it more selective. Expected range transparency is for the visual appearance, not detection sensitivity.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You need to create a reusable data preparation layer that multiple reports can use. The data should be stored in the Power BI service. What should you create?",
+      "a": "B",
+      "o": [
+        "Power BI dataset",
+        "Dataflow",
+        "Power Query template",
+        "Shared dataset"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Dataflows provide a cloud-based ETL layer that can be reused across multiple datasets and reports."
+    },
+    {
+      "q": "You configure an incremental refresh policy on a table with 5 years of data. Real-time data must be refreshed daily. Historical data should not be reprocessed. What do you set as the refresh period?",
+      "a": "C",
+      "o": [
+        "1 year",
+        "5 years",
+        "1 day",
+        "7 days"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "The refresh period (e.g., 1 day) determines the window of data that is refreshed each time. Data outside this window is not reprocessed."
+    },
+    {
+      "q": "You update a report that is published as part of a Power BI app. Users report they don't see the changes. What should you do?",
+      "a": "C",
+      "o": [
+        "Republish the report",
+        "Refresh the dataset",
+        "Update the app",
+        "Share the report again"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Apps require explicit updates. You must update the app in the workspace to push changes to all app users."
+    },
+    {
+      "q": "You share a dataset with colleagues. They need to create new reports based on it but should not be able to modify the original dataset. Which permission should you grant?",
+      "a": "B",
+      "o": [
+        "Read",
+        "Build",
+        "Edit",
+        "Reshare"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Build permission allows users to create new reports on top of the dataset without modifying the original."
+    },
+    {
+      "q": "You have an on-premises data gateway. You need to reduce the amount of data sent through the gateway by semantic models that run in Import storage mode.\n\nSolution: You create aggregations to summarize results.\n\nDoes this meet the goal?",
+      "o": [
+        "Yes",
+        "No"
+      ],
+      "a": "B",
+      "e": "No. Creating aggregations summarizes data after it has already passed through the gateway during import. The traffic has already occurred. Aggregations improve query performance but do not reduce data sent through the gateway.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI model with tables: Date, Product, Inventory (daily inventory records). The correct inventory quantity for a given product in a month is the last recorded value for that month.\n\n▸  QUESTION\n\n  You need a DAX measure for the last inventory count.\n  Which functions should the measure use?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. CALCULATE, SUM, LASTDATE",
+        "B. CALCULATE, SUM, PREVIOUSMONTH",
+        "C. SUMX, FILTER, MAX",
+        "D. CALCULATE, AVERAGE, LASTDATE"
+      ],
+      "a": "A",
+      "e": "CALCULATE modifies filter context to use only the last date. LASTDATE('Date'[Date]) returns the last date in the current context. SUM(Inventory[QuantityAvailable]) aggregates the inventory quantity for that last date.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are modeling data by using Power BI. Part of the data model is a large SQL Server table named Order with more than 100 million records.\nDuring development, you need to import a sample of the data from the Order table.\n\n▸  QUESTION\n\n  Proposed Solution: From Power Query Editor, you import the table and then add a filter step to the query.\n  Does this meet the goal?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Yes",
+        "B. No"
+      ],
+      "a": "B",
+      "e": "No. This would load the entire table first before applying the filter, defeating the purpose of sampling. Instead, add a WHERE clause to the SQL statement to filter at the source, reducing data transfer.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI report that imports a date table and a sales table from Azure SQL. The sales table has Due Date, Order Date, Delivery Date foreign keys.\n\n▸  QUESTION\n\n  You need to support analysis of sales over time based on all date foreign keys.\n  Proposed Solution: You create measures using USERELATIONSHIP to filter sales on the active relationship.\n  Does this meet the goal?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Yes",
+        "B. No"
+      ],
+      "a": "B",
+      "e": "No. USERELATIONSHIP activates an inactive relationship, but if only one active relationship exists, you need additional inactive relationships to use USERELATIONSHIP for the other date keys. The active relationship is already the default.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You need to use a dataflow in a report while minimizing online processing and calculation times. The data must include the current year up to the previous day. What should you do?",
+      "a": "C",
+      "o": [
+        "Create a DirectQuery connection",
+        "DirectQuery with gateway",
+        "Import mode with daily refresh",
+        "Import mode with hourly Power Automate refresh"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Import mode with daily refresh meets the requirements: current year through yesterday, minimized online operations, and cached data for fast visuals."
+    },
+    {
+      "q": "You are designing a healthcare analytics model. Which table should be the fact table and which should be the dimension table in a star schema?",
+      "a": "Test Result,Patient key",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "Test Result is the fact table containing measurable data. Patient key is a dimension table containing descriptive attributes."
+    },
+    {
+      "q": "You use Power Query Editor to pull data from a SharePoint Online list. You plan to use Advanced Editor to build a Power Query M formula.\n\n─ REQUIREMENTS ─\n• Load the data\n• Expand a column named Location\n• Hide a column named CountryOrRegion",
+      "o": [
+        "Table.ExpandRecordColumn | Table.RemoveColumns",
+        "Table.ExpandTableColumn | Table.SelectColumns",
+        "Table.AddColumn | Table.RemoveColumns",
+        "Table.ExpandRecordColumn | Table.SelectColumns"
+      ],
+      "a": "A",
+      "e": "Table.ExpandRecordColumn flattens the Location record into separate columns. Table.RemoveColumns removes CountryOrRegion from the dataset. Table.SelectColumns would keep only selected columns but remove all others, which is not the requirement.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "Your DirectQuery model contains case-sensitive data causing undefined values. Solution: Convert values using UPPER(). Does this meet the goal?",
+      "a": "A",
+      "o": [
+        "Yes",
+        "No"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Using UPPER() normalizes case, ensuring consistent comparison and preventing case-sensitivity errors in the semantic model."
+    },
+    {
+      "q": "You want to embed Power BI reports in a custom web application for external users without requiring them to have Power BI licenses. Which licensing option should you use?",
+      "a": "D",
+      "o": [
+        "Pro license",
+        "Premium Per User",
+        "Premium capacity with embedded",
+        "Power BI Embedded (SKU)"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Power BI Embedded (Azure SKU) allows embedding in custom apps without per-user licenses for viewers."
+    },
+    {
+      "q": "You have a bar chart showing sales by country. A summary of the data must be accessible by screen reader.\n\nWhat should you configure?",
+      "o": [
+        "Conditional formatting",
+        "Alt text",
+        "Tab order",
+        "Layer order"
+      ],
+      "a": "B",
+      "e": "Alt text (alternative text) provides a textual description for screen readers. Configuring alt text on the bar chart ensures visually impaired users can understand the data summary.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a PBIX file importing several tables from an Azure SQL database. Data will be migrated to another Azure SQL database. You need to change connections with minimal effort.\n\nWhat should you do?",
+      "o": [
+        "In Power Query Editor, create new queries.",
+        "In Power Query Editor, modify the source of each query.",
+        "Create a PBIT file, open it, and change data sources when prompted.",
+        "Modify the Data source settings."
+      ],
+      "a": "D",
+      "e": "Data source settings (File > Options > Data source settings) allows changing the server/database for all queries at once. Modifying each query individually is more work. PBIT is a template format.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have two reports (ReportA, ReportB) with distinct color palettes. You are creating a dashboard with two visuals from each report.\n\n─ REQUIREMENTS ─\nUse a consistent dark theme while preserving original report colors.\n\nWhich two actions should you perform? (Choose two.)\n\nNOTE: Each correct answer is worth one point.",
+      "o": [
+        "Upload a snapshot.",
+        "Set browser color preference to dark mode.",
+        "When pinning visuals, select Use destination theme.",
+        "Select the dark dashboard theme.",
+        "Turn on tile flow."
+      ],
+      "a": "CD",
+      "e": "Selecting the dark dashboard theme applies the color scheme to the entire dashboard. When pinning visuals, selecting 'Use destination theme' overrides the original report colors with the dashboard theme, ensuring consistency.",
+      "t": "hs",
+      "ex": 3
+    },
+    {
+      "q": "You are creating a Power BI report. You need a visual that automatically shows trends and other useful information, updating based on selections in other visuals.\n\nWhich type of visual should you use?",
+      "o": [
+        "Q&A",
+        "Smart narrative",
+        "Key influencers",
+        "Decomposition tree"
+      ],
+      "a": "B",
+      "e": "The Smart Narrative visual automatically summarizes visuals and reports, providing relevant insights that update with filter/selections. Q&A answers natural language queries. Key influencers identify drivers. Decomposition tree enables drill-down exploration.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You need to display a single total sales value with a status indicator showing whether the target was met. Which two visuals should you use together?",
+      "a": "AC",
+      "o": [
+        "Card visual",
+        "KPI visual",
+        "Gauge",
+        "Multi-row card"
+      ],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "A card visual shows the single value. A KPI visual shows the value with target comparison and status indicator."
+    },
+    {
+      "q": "You want to create a button that navigates to a different page in your report and resets all slicers. How should you configure the bookmark?",
+      "a": "C",
+      "o": [
+        "Page bookmark with current state",
+        "Visual bookmark",
+        "Page bookmark with default state",
+        "Report bookmark"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "A page bookmark with default state captures the page without current slicer selections, effectively resetting them."
+    },
+    {
+      "q": "You have a Microsoft 365 subscription with resources. You create a new dashboard that uses RLS filters. You define a new role named Consultants.\n\nTo which resource type can you assign the Consultants role?",
+      "o": [
+        "Microsoft 365 Group (Group2)",
+        "Team (Team1)",
+        "Sales reports",
+        "Distribution Group (Group1)"
+      ],
+      "a": "D",
+      "e": "RLS roles can be assigned to Distribution Groups, Mail-enabled Groups, or Microsoft Entra Security Groups. Microsoft 365 Groups (formerly Office 365 Groups) are NOT supported for RLS role assignment.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI semantic model named Model1 that will be used to support reports viewed in the Power BI service. Model1 contains data from the following sources:\n• An Azure SQL database that is accessible only via a private endpoint\n• A Microsoft Excel file stored in Microsoft SharePoint Online\n• A Microsoft SQL Server database in a private datacenter\n\nYou need to publish Model1 and schedule the model to refresh 12 times a day.\n\n▸  QUESTION\n\n  How many data sources require a data gateway, and which license mode will the workspace require to support the scheduled refresh?\n\n  Answer Area:\n  Data sources requiring gateway: [1 / 2 / 3]\n  License mode: [Pro / Premium Per User (PPU) / Premium capacity]\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. 1 data source requires a gateway; Pro",
+        "B. 1 data source requires a gateway; Premium Per User (PPU)",
+        "C. 2 data sources require a gateway; Pro",
+        "D. 2 data sources require a gateway; Premium Per User (PPU)",
+        "E. 3 data sources require a gateway; Premium capacity"
+      ],
+      "a": "D",
+      "e": "2 data sources require a gateway: The Azure SQL database (private endpoint) and the SQL Server database (private datacenter) require an on-premises data gateway. The SharePoint Online Excel file does not require a gateway. Premium Per User (PPU) is needed because refreshing more than 8 times per day requires PPU or Premium capacity.",
+      "t": "mc",
+      "ex": 5
+    },
+    {
+      "q": "You need to create a report page with two visuals:\n• Visual 1: Display distribution of hierarchical data\n• Visual 2: Search and filter by values\n\nDrag the correct visual types.",
+      "o": [],
+      "a": "Treemap | Slicer",
+      "t": "dd",
+      "ex": 4,
+      "dd": [
+        "Treemap — displays hierarchical data distribution with nested rectangles",
+        "Slicer — provides search and filtering capabilities by values"
+      ],
+      "e": "Treemaps are ideal for showing hierarchical data proportions. Slicers with search enabled allow users to search and filter by specific values."
+    },
+    {
+      "q": "You attempt to create a custom column using the expression 'A' & 1 in Power Query Editor and receive an error. What is the cause?",
+      "a": "mismatched data types",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "The & operator concatenates text. 'A' is text but 1 is a number, causing a data type mismatch. Convert the number to text with Text.From(1)."
+    },
+    {
+      "q": "You have yearly sales columns (2019, 2020, 2021) that you need to transform into a normalized format with Year and Sales columns. What steps should you perform?",
+      "a": "Use first row as header,Unpivot all columns other than Month,Month Number,Rename Attribute to Year and Value to Sales",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "Use headers, unpivot year columns into Attribute/Value pairs, then rename for clarity."
+    },
+    {
+      "q": "You have FirstName and LastName columns. You need to create a FullName column. What sequence of steps should you follow using Column from Examples?",
+      "a": "Select Use First Row as Headers,Select Add Column > Column from Examples,Type the expected value in the first row",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "Column from Examples detects the pattern and generates the transformation for you based on sample outputs."
+    },
+    {
+      "q": "You have an Excel spreadsheet with columns: Department, Stage, School1, School2, School3, School4. You need to transform it to: Department, Stage, School, Score.\n\n─ REQUIREMENTS ─\nPrepare the data for Power BI modeling. Each school and its score should be in separate rows.\n\nDrag the three actions in the correct sequence.",
+      "o": [],
+      "a": "Unpivot schools → Rename columns → Group By",
+      "t": "dd",
+      "ex": 2,
+      "dd": [
+        "Select Department and Stage columns and Unpivot the other columns",
+        "Rename Attribute column to School and Value column to Score",
+        "Group by Department and School, aggregating Score"
+      ],
+      "e": "Step 1: Select Department and Stage, then Unpivot other columns (School1-4). Step 2: Rename Attribute→School and Value→Score. Step 3: Group by Department and School to aggregate scores as needed. This transforms the wide format into a normalized star schema format."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI data model. The Sales table contains records of sales by day from the last five years. You plan to create a measure to return the total sales of March 2021 when March 2022 is selected.\n\n▸  QUESTION\n\n  Which DAX expression should you use?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. CALCULATE(SUM(Sales[Sales]), PREVIOUSYEAR(dimDate[Date]))",
+        "B. TOTALYTD(SUM(Sales[Sales]), dimDate[Date])",
+        "C. CALCULATE(SUM(Sales[Sales]), SAMEPERIODLASTYEAR(dimDate[Date]))",
+        "D. SUM(Sales[Sales])"
+      ],
+      "a": "C",
+      "e": "SAMEPERIODLASTYEAR shifts the date context back by one year. When March 2022 is selected, it returns dates from March 2021, then CALCULATE evaluates SUM(Sales[Sales]) in that shifted context.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have the visual shown in the Original exhibit. You need to configure it as shown in the Modified exhibit.\n\nWhat should you add to the visual?",
+      "o": [
+        "A measure",
+        "An average line",
+        "A trendline",
+        "A forecast"
+      ],
+      "a": "D",
+      "e": "The forecast feature in the Analytics pane extends the time series with predicted future values. This differs from trendlines (which show direction) and average lines (which show mean). Forecast uses exponential smoothing to predict future data points.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have Performance Analyzer results. The visual 'August 2024 Active User %' has the slowest load time and also waits the longest for other visuals.\n\nWhat can you conclude?",
+      "o": [
+        "It is the slowest visual and also the last to begin loading.",
+        "It is the fastest visual but depends on others.",
+        "It has the most complex DAX but loads first.",
+        "It is the simplest visual with minimal data."
+      ],
+      "a": "A",
+      "e": "The visual with the slowest load time takes the longest to render. It also waits longest for other visuals, meaning it is the last to start loading, possibly due to dependencies or low rendering priority.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You need to create a Power BI theme for multiple reports with corporate branding (font size, color, bar chart formatting).\n\nWhat should you do?",
+      "o": [
+        "From Power BI Desktop, customize the current theme.",
+        "From Power BI Desktop, use a built-in report theme.",
+        "Create a theme as a PBIVIZ file and import it.",
+        "Create a theme as a JSON file and import it into Power BI Desktop."
+      ],
+      "a": "D",
+      "e": "Power BI themes are JSON files that define formatting for reports. Creating a JSON theme file allows reuse across multiple reports. Customizing the current theme only applies to one report. PBIVIZ files are for custom visuals, not themes.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have a continuous Age column and want to group values into ranges: 0-18, 19-35, 36-50, 50+. What Power BI feature creates these groups?",
+      "a": "B",
+      "o": [
+        "Calculated column with SWITCH",
+        "Grouping and binning",
+        "What-if parameter",
+        "Conditional column in Power Query"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Binning in Power BI groups numeric values into equal-sized or custom ranges directly in the model."
+    },
+    {
+      "q": "You have a report with a card visualization. You need conditional formatting on the card: values ≥ 100 get dark red font, values < 100 get dark gray font.\n\nWhich format type should you use?",
+      "o": [
+        "Color scale",
+        "Rules",
+        "Field value",
+        "Diverging"
+      ],
+      "a": "B",
+      "e": "Rules mode allows defining custom conditions with if-then-else logic (e.g., ≥ 100 → dark red, < 100 → dark gray). Color scale is for gradient ranges. Field value uses a different column's value.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nIn Power BI Desktop, you are building a sales report with two tables. Both tables have RLS configured. You need to create a relationship between the tables that ensures bidirectional cross-filtering honors RLS settings.\n\n▸  QUESTION\n\n  What should you do?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Create an inactive relationship and select Apply security filter in both directions",
+        "B. Create an active relationship and select Apply security filter in both directions",
+        "C. Create an inactive relationship and select Assume referential integrity",
+        "D. Create an active relationship and select Assume referential integrity"
+      ],
+      "a": "B",
+      "e": "By default, RLS uses single-directional filtering. To honor RLS in both directions, create an active relationship and check 'Apply security filter in both directions'. This ensures RLS propagates across both tables.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You use Power BI Desktop to create a data model and blank report. You need to add a Word Cloud visual.\n\n─ REQUIREMENTS ─\nMinimize development effort.\n\nDrag the three actions in the correct sequence.",
+      "o": [],
+      "a": "Get Word Cloud from AppSource → Populate fields → Format colors and title",
+      "t": "dd",
+      "ex": 3,
+      "dd": [
+        "From Power BI Desktop, get the Word Cloud visual from Microsoft AppSource",
+        "Populate the Category, Value, and Excludes fields",
+        "Format the data colors and title"
+      ],
+      "e": "Step 1: Get the Word Cloud visual from AppSource (ellipsis > Get more visuals > search Word Cloud). Step 2: Populate Category (words), Value (size/frequency), and Excludes. Step 3: Customize colors and title to match requirements."
+    },
+    {
+      "q": "You need a specialized visualization not available in the default Power BI visuals. Where can you find and import certified custom visuals?",
+      "a": "B",
+      "o": [
+        "GitHub",
+        "AppSource",
+        "Power BI Visual Gallery",
+        "Microsoft Store"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "AppSource (within Power BI Desktop or web) hosts certified custom visuals developed by Microsoft and third parties."
+    },
+    {
+      "q": "You need a measure that shows sales for the previous month regardless of the current filter context. Which DAX function should you use?",
+      "a": "D",
+      "o": [
+        "DATEADD with -1 month",
+        "PREVIOUSMONTH",
+        "PARALLELPERIOD",
+        "Both A and B"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "PREVIOUSMONTH returns the previous month's data. DATEADD with -1 can also achieve this but PREVIOUSMONTH is more explicit."
+    },
+    {
+      "q": "You need a visual that enables ad-hoc exploration of data across multiple dimensions, automatically aggregating and allowing drill-down in any order.\n\nWhich type of visual should you use?",
+      "o": [
+        "Smart narrative",
+        "Decomposition tree",
+        "Q&A",
+        "Key influencers"
+      ],
+      "a": "B",
+      "e": "The Decomposition Tree visual lets you visualize data across multiple dimensions, automatically aggregates, and allows drilling down in any order. It is ideal for ad-hoc exploration and root cause analysis. Key influencers ranks drivers. Q&A answers natural language queries.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You need a measure that returns a product's rank only when a single product is selected, otherwise blank. Which DAX functions should you use?",
+      "a": "HASONEVALUE,RANKX",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "HASONEVALUE checks if a single value is selected. RANKX ranks items based on a measure. Combined, they show rank only for single selection."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI report named Report1.\nYou plan to share Report1 with multiple users.\n\n▸  QUESTION\n\n  You need to add the users to a group.\n  Which two types of groups can you use? Each correct answer presents a complete solution.\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Security group",
+        "B. Distribution group",
+        "C. Microsoft Teams team",
+        "D. Microsoft 365 group"
+      ],
+      "a": "AD",
+      "e": "Both security groups and Microsoft 365 groups can be used to manage access to Power BI reports. Security groups are typically used for managing permissions and access control, while Microsoft 365 groups provide a collaborative workspace with shared resources, including access to Power BI reports. Distribution groups and Microsoft Teams teams are not typically used for managing access to Power BI reports in this context.",
+      "t": "hs",
+      "ex": 5
+    },
+    {
+      "q": "You have two tables with identical columns from different departments. You need to combine them into a single table with all rows. Which operation should you use?",
+      "a": "B",
+      "o": [
+        "Merge",
+        "Append",
+        "Join",
+        "Combine"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Append (Union) combines rows from tables with the same structure. Merge (Join) combines columns."
+    },
+    {
+      "q": "As a workspace admin, you need a report showing how many users viewed each report in the workspace over the last 30 days. What should you use?",
+      "a": "C",
+      "o": [
+        "Power BI Admin portal audit log",
+        "Usage metrics report in workspace",
+        "Microsoft 365 admin center",
+        "Custom DAX queries"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Usage metrics reports (built-in per workspace) show views, viewers, and other engagement metrics for reports and dashboards."
+    },
+    {
+      "q": "You publish a report with defined RLS roles. When can you assign users to the roles in the Power BI service?",
+      "a": "After the report is published",
+      "o": [],
+      "dd": [
+        "Before publishing",
+        "After the report is published",
+        "During publishing",
+        "In Power BI Desktop"
+      ],
+      "t": "dd",
+      "answer_explanation": "Users can only be assigned to RLS roles after the report is published, in the Power BI service dataset security settings."
+    },
+    {
+      "q": "You have a Power BI semantic model. You need a column for year-over-year (YOY) revenue change factor compared to the previous year's monthly revenue.\n\n─ REQUIREMENTS ─\nSelect the appropriate functions to complete the DAX formula.\n\nNOTE: Each correct selection is worth one point.",
+      "o": [
+        "DIVIDE | SAMEPERIODLASTYEAR",
+        "SUM | DATEADD",
+        "DIVIDE | PREVIOUSMONTH",
+        "CALCULATE | SAMEPERIODLASTYEAR"
+      ],
+      "a": "A",
+      "e": "DIVIDE safely calculates percentage change while avoiding division-by-zero errors. SAMEPERIODLASTYEAR returns a set of dates matching the current selection from one year earlier, enabling correct year-over-year comparison at the monthly level.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI report with a 550 MB PBIX file, 12 million rows, single page with 15 AppSource and 10 default visuals. Users report slow loading.\n\n▸  QUESTION\n\n  What should you recommend?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Implement row-level security (RLS)",
+        "B. Remove unused columns from tables in the data model",
+        "C. Replace the default visuals with AppSource visuals",
+        "D. Enable visual interactions"
+      ],
+      "a": "B",
+      "e": "Removing unused columns reduces the model size (from 550 MB), improving load and query performance. RLS does not reduce model size. AppSource visuals are slower. Visual interactions don't address the root cause.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have a line chart showing the number of employees over time. You need to see total salary costs when hovering over a data point.\n\nWhat should you do?",
+      "o": [
+        "Add salary to the drillthrough fields.",
+        "Add salary to the visual filters.",
+        "Add salary to the tooltips.",
+        "Add salary to the legend."
+      ],
+      "a": "C",
+      "e": "Adding a field to the Tooltips bucket in a visual makes its value appear when hovering over data points. This provides contextual information without cluttering the visual. Drillthrough navigates to another page. Visual filters restrict data.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have a Power BI semantic model with tables and relationships shown in an exhibit (not available). Dim Address is used in multiple roles.\n\nWhich type of dimension is represented by Dim Address?",
+      "o": [
+        "Type 2 slowly changing dimension (SCD)",
+        "Junk dimension",
+        "Role-playing dimension",
+        "Degenerate dimension"
+      ],
+      "a": "C",
+      "e": "An Address dimension commonly serves multiple roles: Billing Address, Shipping Address, Customer Address. When the same dimension structure is used multiple times with different meanings, it is a role-playing dimension. A junk dimension combines low-cardinality flags.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have tables Population (PopulationAmount, DateKey) and Date. Relationship: many-to-one on DateKey. Measures:\n• Total Population = SUM('Population'[PopulationAmount])\n• 2023 Population = CALCULATE([Total Population], 'Date'[Year] = 2023)\n\nYou create a table visual: Date[Year] and [2023 Population].\n\nWhat will the visual show?",
+      "o": [
+        "One row per year with blank values except 2023",
+        "One row per date with the 2023 value repeated",
+        "A single row for 2023 with the population value",
+        "One row per year with the same 2023 value repeated"
+      ],
+      "a": "D",
+      "e": "The 2023 Population measure always returns the 2023 value regardless of the current year context. Since Date[Year] is in the visual, it shows all years, but the measure repeats the 2023 population for every row.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You need to create a visual to compare sales performance of five regions for the current month.\n\nWhich visual should you use?",
+      "o": [
+        "Line chart",
+        "Stacked bar chart",
+        "100% stacked bar chart",
+        "Waterfall chart"
+      ],
+      "a": "B",
+      "e": "A stacked bar chart compares values across categories (sales regions) while showing both individual and total values. Line charts are for trends. 100% stacked shows proportions, not absolute values.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a Power BI semantic model named Model1 that runs in Import storage mode.\n\nYou need to reduce the size of Model1. The solution must NOT increase report query response times.\n\nWhat should you do?",
+      "o": [
+        "Remove unnecessary columns.",
+        "Unpivot unnecessary columns.",
+        "Rename unnecessary columns.",
+        "Change Model1 to DirectQuery storage mode."
+      ],
+      "a": "A",
+      "e": "Removing unnecessary columns directly reduces model size by eliminating data not needed. This does not affect query performance since excluded data is not part of the model. Unpivoting increases rows. Renaming does not reduce size. DirectQuery may reduce size but can slow query response.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a CSV with months as columns and order amounts as values. You need: first column = month, second = year, third = order amount.\n\nWhich transformation should you use first?",
+      "o": [
+        "Remove",
+        "Unpivot",
+        "Transpose",
+        "Pivot"
+      ],
+      "a": "B",
+      "e": "Unpivot converts columns into rows, transforming the wide format (months as columns) into a tall format (month, year, amount as rows). Remove deletes columns, Transpose swaps rows/columns, Pivot does the opposite of unpivot.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou use Power BI Desktop to open a PBIX file that contains a Microsoft Excel data source. You attempt to refresh the data and receive the following error message:\nExpression.Error: The column 'Cost' of the table wasn't found.\n\n▸  QUESTION\n\n  What is a possible cause of the error?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. The Cost column was renamed in the data source.",
+        "B. The privacy level of the data source does not allow combining the data with other data sources.",
+        "C. The data in the Cost column cannot be converted into the target data type.",
+        "D. The source file was moved to a new location."
+      ],
+      "a": "A",
+      "e": "The Cost column was renamed in the data source. When a column name is changed in the data source (e.g., Microsoft Excel), Power BI will not be able to find the column with the original name during the refresh, leading to the error you encountered.",
+      "t": "mc",
+      "ex": 5
+    },
+    {
+      "q": "You need to create a report quickly from an existing published dataset. The requirement is to minimize development time. What should you do?",
+      "a": "A",
+      "o": [
+        "Create a live connection to the existing dataset",
+        "Import data from the source",
+        "Create a new dataset from scratch",
+        "Connect to dataflows"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "A live connection to an existing dataset reuses all measures, relationships, and hierarchies, minimizing development time."
+    },
+    {
+      "q": "You want to apply a consistent color palette and font across all reports in your organization. What should you create and share?",
+      "a": "A",
+      "o": [
+        "Report theme JSON file",
+        "Custom template PBIX",
+        "Power BI Desktop options",
+        "CSS stylesheet"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "A report theme JSON file defines colors, fonts, and visual defaults that can be imported into any Power BI report."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI data model with an Employees table (Employee Name, Email Address, Start Date, Job Title). You are implementing dynamic RLS so users see only their own data.\n\n▸  QUESTION\n\n  Which DAX expression should you use?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. [Employee Name] = USERPRINCIPALNAME()",
+        "B. [Email Address] = USERNAME()",
+        "C. [Employee Name] = USERNAME()",
+        "D. [Email Address] = USERPRINCIPALNAME()"
+      ],
+      "a": "D",
+      "e": "[Email Address] = USERPRINCIPALNAME(). USERPRINCIPALNAME() returns the user's UPN (typically their email). The Email Address column from the Employees table is compared against this value, ensuring each user sees only their own record.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You write a complex DAX measure that calculates the same sub-expression multiple times. You want to improve readability and performance. What DAX feature should you use?",
+      "a": "A",
+      "o": [
+        "VAR ... RETURN",
+        "EARLIER",
+        "CALCULATE",
+        "FILTER"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "VAR stores intermediate results, improves readability by giving meaningful names, and computes once for better performance."
+    },
+    {
+      "q": "Your team develops reports in a dev workspace, tests in test, and publishes to production. You need to manage content promotion across these stages. What should you use?",
+      "a": "B",
+      "o": [
+        "Version control with Git",
+        "Deployment pipelines",
+        "Export and import PBIX",
+        "Power Automate"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Deployment pipelines provide a structured dev-test-prod workflow with support for rule-based content deployment."
+    }
+  ]
+}

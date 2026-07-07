@@ -1,0 +1,782 @@
+{
+  "exam": 6,
+  "total": 61,
+  "exam_minutes": 100,
+  "questions": [
+    {
+      "q": "You have a Power BI visual that uses indicators to show out-of-range values (from exhibit).\n\n─ REQUIREMENTS ─\n(1) Which visual type supports indicator-based out-of-range detection?\n(2) Which feature detects anomalies automatically?",
+      "o": [
+        "A line chart | Anomaly detection",
+        "A line and clustered column chart | Anomaly detection",
+        "A ribbon chart | Forecast",
+        "A line chart | Forecast"
+      ],
+      "a": "A",
+      "e": "Line charts with anomaly detection automatically identify outliers in time series data. The Line and Clustered Column Chart is a combo chart, not the standard line chart for anomaly detection. Anomaly detection provides explanations for detected anomalies.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have a report with 4 pages, each containing slicers for the same 4 fields. Users report slicer selections on one page do not persist on other pages.\n\n─ REQUIREMENTS ─\nUsers should select a value once to filter all pages.\n\nWhich two recommendations achieve this? (Choose two.)\n\nNOTE: Each correct answer is worth one point.",
+      "o": [
+        "Create a bookmark for each slicer value.",
+        "Replace the slicers with report-level filters.",
+        "Sync the slicers across the pages.",
+        "Replace the slicers with page-level filters.",
+        "Replace the slicers with visual-level filters."
+      ],
+      "a": "BC",
+      "e": "Syncing slicers across pages propagates selections globally. Report-level filters apply to all pages, achieving the same result. Bookmarks would require manual creation for each value. Page-level filters only affect individual pages. Visual-level filters are too granular.",
+      "t": "hs",
+      "ex": 3
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI data model that contains three tables named Orders, Date, and City. There is a one-to-many relationship between Date and Orders and between City and Orders. The model contains two RLS roles: Role1 filters City[State Province] = \"Kentucky\", Role2 filters Date[Calendar Year] = 2020.\nIf a user is a member of both Role1 and Role2, what data will they see?\n\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. The user will see data where State Province is Kentucky OR Calendar Year is 2020",
+        "B. The user will receive an error and will not be able to see data",
+        "C. The user will only see data where State Province is Kentucky",
+        "D. The user will only see data where State Province is Kentucky AND Calendar Year is 2020"
+      ],
+      "a": "A",
+      "e": "When a user is a member of multiple RLS roles, the filters are combined with OR (union), not AND (intersection). So the user sees data matching either filter: Kentucky OR 2020.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nFrom Power Query Editor, you profile data where IoT GUID and IoT ID columns are both unique per row. You need to analyze IoT events by hour and day while improving dataset performance.\n\n▸  QUESTION\n\n  Proposed Solution: You remove the IoT GUID column and retain the IoT ID column.\n  Does this meet the goal?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Yes",
+        "B. No"
+      ],
+      "a": "A",
+      "e": "Yes. Both columns are unique per row, so either can serve as a key. Removing IoT GUID (16-byte binary) and keeping IoT ID (4-byte integer) reduces model size and improves performance while maintaining analysis capability.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have a Power BI semantic model with:\n• FactSales (SalesID, ProductID, Quantity, Amount)\n• DimProduct (ProductID, ProductName, Category)\n\nYou need a relationship from FactSales to DimProduct with the fastest DAX query performance.\n\nWhich cardinality should you use?",
+      "o": [
+        "One-to-Many",
+        "One-to-One",
+        "Many-to-Many",
+        "Many-to-One"
+      ],
+      "a": "D",
+      "e": "Many-to-One (from FactSales to DimProduct) is the correct cardinality in a star schema. A fact table contains many transactions (many) that relate to a single dimension row (one). This cardinality provides optimal query performance in DAX.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You need to create a parameter that allows users to dynamically change the target sales amount in a visualization. Which type of parameter should you create?",
+      "a": "C",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "A what-if parameter in Power BI creates a measure that users can adjust via a slicer to see hypothetical scenarios."
+    },
+    {
+      "q": "You plan to create a quarterly profit report. Requirements:\n• Emphasize percentage of total profits by product category (dollars and percentage)\n• Compare profit margins across sales regions\n\nDrag the correct visual for each requirement.",
+      "o": [],
+      "a": "Pie Chart | Stacked Bar Chart",
+      "t": "dd",
+      "ex": 4,
+      "dd": [
+        "Pie Chart — shows each product category's contribution to total profit in dollars and percentage",
+        "Stacked Bar Chart — compares profit margins across sales regions"
+      ],
+      "e": "Pie charts excel at showing parts of a whole (category contribution with percentage). Stacked bar charts effectively compare values across categories (regions)."
+    },
+    {
+      "q": "You are creating a line chart from an exhibit. The exhibit shows a visual with drill-down capability.\n\n─ REQUIREMENTS ─\n(1) Which Analytics pane feature adds a reference line?\n(2) Which field enables drill-down in the visual?",
+      "o": [
+        "An average reference line | Axis",
+        "A percentile line | Legend",
+        "A constant line | Values",
+        "A forecast | Axis"
+      ],
+      "a": "A",
+      "e": "The Analytics pane's average reference line adds a dynamic reference line to visuals. The Axis field (typically a date hierarchy) enables drill-down/up capability in the visual. Drill-through is a different concept for navigating between report pages.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You need a measure that calculates the total sales for the current quarter. Which DAX function should you use?",
+      "a": "C",
+      "o": [
+        "TOTALYTD",
+        "TOTALMTD",
+        "TOTALQTD",
+        "DATESQTD"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "TOTALQTD calculates the quarter-to-date value of an expression based on the date context."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are building a financial report. You have a table named financials with Date and Sales columns. You need a measure calculating the relative change in sales compared to the previous quarter.\n\n▸  QUESTION\n\n  Which DAX functions complete the measure?\n  Measure = [Box1](SUM(financials[Sales]), [Box2](financials[Date], -1, QUARTER)) / [Box3]...\n\n──────────────────────────────────────────────────",
+      "dd": [
+        "CALCULATE",
+        "DATEADD",
+        "DIVIDE"
+      ],
+      "a": "CALCULATE\nDATEADD\nDIVIDE",
+      "e": "CALCULATE modifies filter context. DATEADD with -1 QUARTER shifts dates back one quarter. DIVIDE safely computes the ratio.",
+      "t": "dd",
+      "ex": 1
+    },
+    {
+      "q": "You have a report with a table visual showing Category, Total Cost, Total Sales by month. You need to modify it to show months as columns and measures as rows.\n\nWhich visual type and format settings should you use?",
+      "o": [
+        "Matrix | Set Stepped layout to Off",
+        "Table | Set Row subtotals to Off",
+        "Matrix | Set Rows subtotals to Off",
+        "Table | Set Stepped layout to Off"
+      ],
+      "a": "A",
+      "e": "A Matrix visual pivots data with columns and rows. Setting Stepped layout to Off flattens the hierarchy. A Table cannot pivot measures to rows. Subtotals settings are unrelated to the layout requirement.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You use Power Query Editor to preview a query with columns: Tax Amount, Sales Order ID, Freight Amount, Subtotal Amount, Total Item Quantity. Sales Order ID is unique. Subtotal Amount and Total Item Quantity are always populated. Tax Amount and Freight Amount are sometimes null.\n\nYou need to calculate:\n• The average item quantity per order\n• The average freight amount per order\n• The maximum item quantity per order\n\n─ REQUIREMENTS ─\nMetrics must be accurate by month.",
+      "o": [
+        "In the Total Item Quantity column, replace the null values with 0.",
+        "In the Tax Amount column, remove rows that contain null values.",
+        "In the Freight Amount column, remove rows that contain null values.",
+        "In the Freight Amount column, replace the null values with 0."
+      ],
+      "a": "D",
+      "e": "Replace null values in Freight Amount with 0. This ensures all orders are included in the average freight calculation. Null Freight Amount means no freight charge, so 0 is correct. Total Item Quantity is always populated so no change needed there. Removing rows with null Freight would exclude valid orders with $0 freight.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "Your DirectQuery model is slow for large datasets. You want to pre-aggregate data at a higher level for faster queries. What should you create?",
+      "a": "A",
+      "o": [
+        "Aggregation table",
+        "Calculated table",
+        "Summary table in SQL",
+        "What-if parameter"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Aggregation tables store pre-summarized data that Power BI queries instead of the full detail, improving performance."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI semantic model.\n\n▸  QUESTION\n\n  You need to configure row-level security (RLS) to restrict data access for users that have the Viewer permissions.\n  Which three actions should you perform in sequence?\n\n──────────────────────────────────────────────────",
+      "dd": [
+        "From Microsoft Power BI Desktop, create a new RLS role by using a DAX filter",
+        "Publish the semantic model",
+        "From the Power BI service, assign the new RLS role to the users",
+        "Share the report directly to each user"
+      ],
+      "a": "From Microsoft Power BI Desktop, create a new RLS role by using a DAX filter\nPublish the semantic model\nFrom the Power BI service, assign the new RLS role to the users",
+      "e": "1. From Microsoft Power BI Desktop, create a new RLS role by using a DAX filter. You must first define the RLS roles and the corresponding DAX filters in Power BI Desktop to determine how data is restricted for different users. 2. Publish the semantic model. After creating the RLS roles, you need to publish the semantic model to the Power BI Service to apply these roles in the cloud environment. 3. From the Power BI service, assign the new RLS role to the users. Once the model is published, you assign the roles to specific users or groups in the Power BI Service to enforce RLS.",
+      "t": "dd",
+      "ex": 5
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are evaluating how to optimize a Power BI imported data model.\n\n▸  QUESTION\n\n  Which of the following statements about optimization is correct?\n  1. Removing unnecessary columns from the analysis reduces model size.\n  2. The surrogate key OrderDateKey can be removed from the analysis.\n  3. Removing Tax Charged (not relevant for analysis) reduces model size.\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Only statement 1 is correct",
+        "B. Only statement 2 is correct",
+        "C. Only statement 3 is correct",
+        "D. Statements 2 and 3 are correct"
+      ],
+      "a": "A",
+      "e": "Statement 1: Yes - removing unnecessary columns reduces model size. Statement 2: No - OrderDateKey is a surrogate key needed for relationships. Statement 3: No - Tax Charged, if not relevant, can be removed.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have a dataset with revenue data from the past year. You need to use anomaly detection to show anomalies.\n\n─ REQUIREMENTS ─\nSelect the correct configuration options.",
+      "o": [
+        "Line chart | Populate the axis with a date field",
+        "Column chart | Populate the axis with a category field",
+        "Area chart | Populate the values with revenue",
+        "Line chart | Populate the legend with a category field"
+      ],
+      "a": "A",
+      "e": "Anomaly detection is only supported for line chart visuals with time series data in the Axis field. The axis must contain a date field to enable the anomaly detection option in the Analytics pane.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "Your fiscal year starts in July. You need a measure that calculates sales from July to the current period. Which DAX function should you use?",
+      "a": "B",
+      "o": [
+        "DATESYTD with year_end_date parameter",
+        "TOTALYTD with year_end_date parameter",
+        "DATESQTD",
+        "Calculate with DATESBETWEEN"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "TOTALYTD with the year_end_date parameter set to '06-30' correctly calculates fiscal YTD for a July-June fiscal year."
+    },
+    {
+      "q": "You have a report with a Profit measure. You need to compare profit across 10 product categories for a selected quarter.\n\nWhich visual is best?",
+      "o": [
+        "Area chart",
+        "Funnel chart",
+        "Clustered bar chart",
+        "Line chart"
+      ],
+      "a": "C",
+      "e": "A clustered bar chart is best for comparing discrete values across categories side-by-side. It makes it easy to identify highest and lowest performers across 10 product categories.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a report with visuals at specific X/Y coordinates. You need to modify each visual's location.\n\nWhat should you modify?",
+      "o": [
+        "Layer order",
+        "Padding",
+        "Position",
+        "Tab order"
+      ],
+      "a": "C",
+      "e": "Position refers to the X/Y coordinates of a visual on the report canvas. Adjusting position moves the visual to a different location. Layer order controls front/back stacking. Padding is internal spacing.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI report for marketing with Posts and Traffic tables. One-to-many from Posts to Traffic by URL. Visuals need: Post Title, Publish Date, Views, Referring URL.\n\n▸  QUESTION\n\n  Which two actions reduce load times?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Remove rows in Posts where Publish Date is in last 7 days",
+        "B. Remove rows in Traffic where URL Visited does not contain blog",
+        "C. Remove Traffic[IP Address], Traffic[Browser Agent], Traffic[Referring URL]",
+        "D. Remove Posts[Full Text] and Posts[Summary]",
+        "E. Remove rows in Traffic where Referring URL does not start with /"
+      ],
+      "a": "BD",
+      "e": "B: Filtering Traffic to only blog rows reduces rows. D: Full Text and Summary columns are not used in visuals and can be removed. Referring URL is needed for a visual, and historical data is needed for 3 visuals.",
+      "t": "hs",
+      "ex": 1
+    },
+    {
+      "q": "You have a card showing year-to-date revenue. Screen reader users must be able to read the value, which must stay updated on refresh.\n\nWhat should you do?",
+      "o": [
+        "Convert the card into a text box.",
+        "Add the value to the chart title text.",
+        "Populate alt text with a static value.",
+        "Populate alt text using conditional formatting with a DAX measure."
+      ],
+      "a": "D",
+      "e": "Using conditional formatting with a DAX measure for alt text ensures the text dynamically updates when the dataset refreshes. Static alt text would not update. A text box cannot dynamically reflect data.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You need to embed a publicly accessible Power BI report on your company's public website. Anyone should be able to view it without authentication. What should you use?",
+      "a": "A",
+      "o": [
+        "Publish to web (public)",
+        "Secure embed",
+        "SharePoint embed",
+        "Power BI Embedded"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Publish to web creates an iframe that anyone can view without authentication. Note: data becomes publicly accessible."
+    },
+    {
+      "q": "You create a dataflow that transforms and loads data. You want the transformed data to be available for other dataflows to reference. What should you create?",
+      "a": "A",
+      "o": [
+        "Computed entity",
+        "Linked entity",
+        "Reference entity",
+        "Derived entity"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Computed entities are created within a dataflow using transformations and can be referenced by other dataflows."
+    },
+    {
+      "q": "You are creating a report with three pages. You need to create a custom tooltip page.\n\nWhich three actions should you perform? (Choose three.)\n\nNOTE: Each correct answer is worth one point.",
+      "o": [
+        "For the tooltip page, set Allow use as tooltip to On.",
+        "For the target page, set Allow use as tooltip to On.",
+        "Configure filters on the target visual.",
+        "For the tooltip page, configure filters.",
+        "Add and configure visuals on the tooltip page."
+      ],
+      "a": "ADE",
+      "e": "A: The tooltip page must have 'Allow use as tooltip' enabled to be eligible. D: Filters on the tooltip page control data based on the hovered element. E: The tooltip page must contain the visuals shown when hovering. The target page does not need the tooltip setting.",
+      "t": "hs",
+      "ex": 3
+    },
+    {
+      "q": "A user creates ReportA with a custom theme. You create DashboardA.\n\n─ REQUIREMENTS ─\nEnsure DashboardA uses the custom theme from ReportA while minimizing development effort.\n\nWhich two actions should you perform? (Choose two.)\n\nNOTE: Each correct selection is worth one point.",
+      "o": [
+        "Publish ReportA to Power BI.",
+        "From ReportA, save the current theme.",
+        "Publish ReportA to the Microsoft Power BI Community theme gallery.",
+        "From DashboardA, create a custom theme.",
+        "From DashboardA, upload a JSON theme."
+      ],
+      "a": "BE",
+      "e": "Saving the current theme from ReportA exports it as a JSON file. Uploading that JSON theme to DashboardA applies the same custom theme. Publishing alone does not transfer the theme. Creating a new theme from scratch requires more effort.",
+      "t": "hs",
+      "ex": 2
+    },
+    {
+      "q": "You have an on-premises data gateway. You need to reduce the amount of data sent through the gateway by semantic models that run in Import storage mode.\n\nSolution: You increase Automatic page refresh intervals.\n\nDoes this meet the goal?",
+      "o": [
+        "Yes",
+        "No"
+      ],
+      "a": "B",
+      "e": "No. Automatic page refresh can only be used with DirectQuery storage mode, not Import mode. It also has nothing to do with reducing data sent through the on-premises data gateway.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You implement RLS using a DAX filter: [Department] = 'Sales'. A sales manager should see all departments. How should you modify the rule?",
+      "a": "D",
+      "o": [
+        "Add OR condition for manager",
+        "Use USERNAME() function",
+        "Create multiple roles",
+        "Use USERPRINCIPALNAME() and a table mapping"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Dynamic RLS with a user mapping table and USERPRINCIPALNAME() allows different filter rules per user."
+    },
+    {
+      "q": "You have ReportA in a Power BI tenant that allows data export. You need to ensure consumers of ReportA cannot export data from visuals.\n\nWhich two actions should you perform? (Choose two.)\n\nNOTE: Each correct answer is a complete solution.",
+      "o": [
+        "From Power BI Desktop, modify the Report settings.",
+        "From Power BI Desktop, modify the Data Load settings.",
+        "From Power BI service, modify the dataset permissions.",
+        "From Power BI service, modify the Report settings."
+      ],
+      "a": "AD",
+      "e": "Report settings in both Power BI Desktop and Power BI service allow disabling data export for specific reports. Dataset permissions affect data access but not the export capability. Data Load settings are unrelated to export permissions.",
+      "t": "hs",
+      "ex": 3
+    },
+    {
+      "q": "You import data from an Excel sheet where the source data is not formatted as a table, just a named range. What happens when new rows are added to the range?",
+      "a": "C",
+      "o": [
+        "Power BI automatically detects new rows",
+        "The range must be converted to a table first",
+        "New rows outside the original named range are not imported",
+        "Refresh fails"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Named ranges are static. New rows added outside the original range boundaries won't be included on refresh."
+    },
+    {
+      "q": "You have an on-premises data gateway. You need to reduce the amount of data sent through the gateway by semantic models that run in Import storage mode.\n\nSolution: You decrease the dashboard cache update frequency.\n\nDoes this meet the goal?",
+      "o": [
+        "Yes",
+        "No"
+      ],
+      "a": "B",
+      "e": "No. Dashboard cache update frequency determines how often Power BI refreshes dashboard visuals from the dataset. It does not directly reduce the amount of data sent through the on-premises data gateway for models in Import storage mode.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Microsoft SharePoint Online site that contains several document libraries. One of the document libraries contains manufacturing reports saved as Microsoft Excel files. All the manufacturing reports have the same data structure.\n\n▸  QUESTION\n\n  You need to use Power BI Desktop to load only the manufacturing reports to a table for analysis.\n  What should you do?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Get data from a SharePoint folder and enter the site URL. Select Transform, then filter by the folder path to the manufacturing reports library",
+        "B. Get data from a SharePoint list and enter the site URL. Select Combine & Transform, then filter by the folder path to the manufacturing reports library",
+        "C. Get data from a SharePoint folder, enter the site URL, and then select Combine & Load",
+        "D. Get data from a SharePoint list, enter the site URL, and then select Combine & Load"
+      ],
+      "a": "A",
+      "e": "We have to import Excel files from SharePoint, so we need the SharePoint folder connector which is used to get access to files stored in the library. SharePoint list is a collection of content that has rows and columns (like a table) and is used for task lists, calendars, etc. Since we need to filter only manufacturing reports, we select Transform and filter by folder path.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You need to create a report page with two views: Sales By Postal Code (map) and Sales By Month (column chart). Both need a Chain slicer. Users switch between views using buttons.\n\n─ REQUIREMENTS ─\nThe selected Chain value must be maintained when switching.\n\nSelect the minimum number of bookmarks and the property to apply.",
+      "o": [
+        "2 bookmarks | Display",
+        "2 bookmarks | Data",
+        "1 bookmark | Display",
+        "3 bookmarks | Data"
+      ],
+      "a": "A",
+      "e": "Two bookmarks are needed (one for each view). The Display property ensures filters and slicers are preserved (Data properties) while switching. Using Display-only bookmarks means the Chain slicer selection is maintained across views.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have ProductsGroupA and ProductsGroupB. You need to find products in GroupA that do NOT exist in GroupB. Which merge join kind should you use?",
+      "a": "C",
+      "o": [
+        "Left outer",
+        "Right outer",
+        "Left anti",
+        "Right anti"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Left anti join returns rows from the left table that have no match in the right table."
+    },
+    {
+      "q": "You have Workspace1 with dataset DS1 and report RPT1. A user needs to create a report using DS1 data and publish to another workspace, with minimal permissions granted.\n\nWhat should you do?",
+      "o": [
+        "Add the user as Viewer of Workspace1.",
+        "Grant Build permission for DS1 to the user.",
+        "Share RPT1 with the user.",
+        "Add the user as Member of Workspace1."
+      ],
+      "a": "B",
+      "e": "Build permission allows connecting to the dataset and creating new reports without granting workspace access. Viewer or Member roles on the workspace would give access to all content, not just the dataset.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a report in Power BI Desktop. You add a Key Influencers visual.\n\nIn an exhibit (not available), the visual analyzes a metric with Explain By fields.\n\n─ REQUIREMENTS ─\n(1) What action increases the number of factors analyzed?\n(2) If a field's score is 0.30 instead of 0.10, how many times greater is the impact?",
+      "o": [
+        "Adding more fields to Explain By | 3 times greater",
+        "Moving fields to Expand By | 2 times greater",
+        "Adding more fields to Expand By | 0.3 times greater",
+        "Removing fields from Explain By | 10 times greater"
+      ],
+      "a": "A",
+      "e": "Adding more fields to Explain By increases the number of factors analyzed by the Key Influencers visual. The score ratio (0.30 / 0.10 = 3) indicates the factor is 3 times more influential. Moving fields to Expand by does not add new factors.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a stacked bar chart. You need to add a new field to the legend combining information from separate columns.\n\nWhat should you create?",
+      "o": [
+        "A calculated column",
+        "A dynamic format string",
+        "A measure",
+        "A calculation group"
+      ],
+      "a": "A",
+      "e": "A calculated column can concatenate values from multiple columns (e.g., 'Region' & ' - ' & 'Category'). The legend expects a column for categorization. A measure returns a single value, not suitable for legend categories.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "Your organization wants to control when Power BI Desktop updates are deployed to users rather than relying on automatic updates. What should you configure?",
+      "a": "B",
+      "o": [
+        "Windows Update policy",
+        "Power BI Desktop admin settings",
+        "Group Policy",
+        "Microsoft Intune"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Power BI Desktop can be configured to use a local admin-managed update source rather than the public monthly release."
+    },
+    {
+      "q": "You create a calculated column in Power BI Desktop. When you publish to the Power BI service and configure a scheduled refresh, what happens to the calculated column?",
+      "a": "C",
+      "o": [
+        "It must be recalculated in the service",
+        "It is removed during refresh",
+        "It is persisted and refreshed with the dataset",
+        "It becomes a measure"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Calculated columns are computed during data refresh and stored in the model. They persist and update on each refresh."
+    },
+    {
+      "q": "You have a semantic model with relationships shown in an exhibit (not available). A DimDate table is used multiple times in different roles (Order Date, Shipped Date).\n\n─ REQUIREMENTS ─\n(1) Identify the type of dimension DimDate represents.\n(2) If you filter the base DimDate table (not an alias), will it filter FactOrderDetails?",
+      "o": [
+        "Role-playing dimension | will not filter FactOrderDetails",
+        "Junk dimension | will filter FactOrderDetails",
+        "Degenerate dimension | will not filter FactOrderDetails",
+        "Slowly changing dimension | will filter FactOrderDetails"
+      ],
+      "a": "A",
+      "e": "A role-playing dimension is one physical table used multiple times with different roles (Order Date, Shipped Date, etc.). Filtering the base DimDate table directly does not affect FactOrderDetails because there is no direct active relationship from the base table — the relationships use role-specific aliases.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You need to refresh a dataset that connects to an on-premises SQL Server database. The refresh must run on a schedule. What must you install and configure?",
+      "a": "C",
+      "o": [
+        "Power BI Desktop gateway",
+        "On-premises data gateway (personal mode)",
+        "On-premises data gateway (standard mode)",
+        "Azure Relay"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "The standard on-premises data gateway enables scheduled refresh for multiple users and supports shared data sources."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a data source that contains a column. The column contains case sensitive data.\nYou have a Power BI semantic model in DirectQuery mode.\nYou connect to the model and discover that it contains undefined values and errors.\n\n▸  QUESTION\n\n  You need to resolve the issue.\n  Proposed Solution: You implicitly convert the values into the required type.\n  Does this meet the goal?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Yes",
+        "B. No"
+      ],
+      "a": "B",
+      "e": "No. The issue stems from case sensitivity, not data type. Implicit type conversion does not address case sensitivity mismatches. To resolve the issue, you need to normalize the case (e.g., convert all text to lowercase or uppercase) or configure the DirectQuery connection for case-insensitive comparisons.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "Your dataset uses a cloud-only data source (Azure SQL). Solution: Install an on-premises data gateway. Does this meet the goal?",
+      "a": "B",
+      "o": [
+        "Yes",
+        "No"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Cloud data sources don't require an on-premises gateway. The gateway is only needed for on-premises or private network data sources."
+    },
+    {
+      "q": "You import Order Header and Order Details tables from Azure SQL, related by Order ID. You need to combine them into one query with unique columns from each. Which Power Query Editor option should you use?",
+      "a": "A",
+      "o": [
+        "Merge queries",
+        "Combine files",
+        "Append queries",
+        "Union"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Merge queries joins tables horizontally by matching rows on a common column (like SQL JOIN). Append adds rows vertically."
+    },
+    {
+      "q": "You are creating a dashboard in Power BI service. An existing report page contains three charts with interactivity between them.\n\n─ REQUIREMENTS ─\nAdd the charts to the dashboard while maintaining interactivity.",
+      "o": [
+        "Edit interactions and set all to Filter.",
+        "Pin each chart as a tile.",
+        "Edit the dashboard theme and pin each chart.",
+        "Pin the report page as a live tile."
+      ],
+      "a": "D",
+      "e": "Pinning an entire report page as a live tile preserves interactivity between visuals on the dashboard. Live tiles reflect changes made to the original report. Pinning individual charts as static tiles loses interactivity.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You need a visualization to compare revenue and cost over time.\n\nWhich type of visualization should you use?",
+      "o": [
+        "Waterfall chart",
+        "Stacked area chart",
+        "Line chart",
+        "Donut chart"
+      ],
+      "a": "C",
+      "e": "A line chart can display multiple series (revenue and cost) over a continuous time axis, making it ideal for comparing trends over time. Waterfall shows cumulative changes. Stacked area shows composition. Donut shows proportions of a whole.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are modifying a Power BI model. You have a Sales table with Sales Amount and a Transaction Size lookup table. You need a calculated column classifying each transaction as small, medium, or large based on Sales Amount.\n\n▸  QUESTION\n\n  How should you complete the code?\n  Size = [Box1]([Box2](Sales[Sales Amount] >= 100, Sales[Sales Amount] < 1000), \"Medium\", ... )\n\n──────────────────────────────────────────────────",
+      "dd": [
+        "FILTER",
+        "AND",
+        "CALCULATE"
+      ],
+      "a": "FILTER\nAND\nCALCULATE",
+      "e": "Box 1: FILTER - needs to be followed by table reference. Box 2: AND - checks both lower and upper limits. Box 3: CALCULATE - evaluates expression with modified filters. The FILTER and CALCULATE pattern is used to count distinct transactions within each size category.",
+      "t": "dd",
+      "ex": 1
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a data source that contains a column. The column contains case sensitive data.\nYou have a Power BI semantic model in DirectQuery mode.\nYou connect to the model and discover that it contains undefined values and errors.\n\n▸  QUESTION\n\n  You need to resolve the issue.\n  Proposed Solution: You normalize casing in the source query or Power Query Editor.\n  Does this meet the goal?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Yes",
+        "B. No"
+      ],
+      "a": "A",
+      "e": "Yes. Normalizing casing resolves the issue by ensuring consistency in how data is interpreted. Transforming all text values to either lowercase or uppercase eliminates case sensitivity issues, allowing Power BI to correctly match and interpret the data, preventing undefined values and errors.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a data source that contains a column. The column contains case sensitive data.\nYou have a Power BI semantic model in DirectQuery mode.\nYou connect to the model and discover that it contains undefined values and errors.\n\n▸  QUESTION\n\n  You need to resolve the issue.\n  Proposed Solution: You add an index key and normalize casing in the data source.\n  Does this meet the goal?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Yes",
+        "B. No"
+      ],
+      "a": "B",
+      "e": "No. Adding an index key and normalizing casing does not resolve undefined values or query errors. Undefined values in DirectQuery are typically caused by invalid data types, nulls, unexpected values, or unsupported transformations. The issue requires fixing data quality problems in the source, not adding indexes.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have an Excel file on a file server. You import a table from it into a Power BI report and publish. The data must refresh every four hours.\n\nWhat should you do first?",
+      "o": [
+        "Upload the Excel file to a Power BI workspace.",
+        "Create a subscription to the report.",
+        "Deploy an on-premises data gateway.",
+        "Edit the data source credentials."
+      ],
+      "a": "C",
+      "e": "An on-premises data gateway is required for Power BI service to access data on a local file server. The gateway bridges the cloud service and on-premises network. Credentials and scheduling are configured after the gateway.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a Pro license and need to refresh an Import dataset as frequently as possible. What is the maximum scheduled refresh frequency for a Pro license?",
+      "a": "A",
+      "o": [
+        "8 times per day",
+        "24 times per day",
+        "48 times per day",
+        "Every 30 minutes"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Power BI Pro allows up to 8 scheduled refreshes per day. Premium allows up to 48 per day."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are building a data model for a Power BI report. Data has a column named Machine-User (e.g., \"Machine1-UserA\"). You need to create a clustered bar chart showing data split by Machine and User.\n\n▸  QUESTION\n\n  What should you do?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. From Power Query Editor, split the Machine-User column by delimiter",
+        "B. From Power Query Editor, create a column with the last three digits",
+        "C. Create two calculated columns using SUBSTITUTE in DAX",
+        "D. Create two measures using SUBSTITUTE in DAX"
+      ],
+      "a": "A",
+      "e": "Splitting by delimiter in Power Query separates Machine-User into two clean columns (Machine and User) at the source. This is the most efficient approach and allows proper use in visuals.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have Products (each product appears once) and Sales (multiple sales per product). What cardinality should the relationship between Products and Sales have?",
+      "a": "A",
+      "o": [
+        "One-to-many",
+        "Many-to-one",
+        "Many-to-many",
+        "One-to-one"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "One-to-many from Products (one side) to Sales (many side) is correct when each product can have multiple sales."
+    },
+    {
+      "q": "In Power Query Editor data profiling, you see that the Email column has 5% errors and 3% empty values. Which feature shows this information?",
+      "a": "D",
+      "o": [
+        "Column Distribution",
+        "Column Profile",
+        "Column Quality",
+        "Data Preview"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Column Quality shows the percentage of valid, error, and empty values in a column."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are creating a Power BI model. You have tables: Country (ID, Country, Email), Sales (ID, CountryID, Amount), Human Resources (ID, CountryID, Budget). Two RLS roles: Manager and CFO. Managers see only their country's data in both tables. CFO sees all Sales data but no HR data.\n\n▸  QUESTION\n\n  How should you configure the RLS filters?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Manager role: Country[Email] = USERPRINCIPALNAME(). CFO role: Human Resources filter = FALSE()",
+        "B. Manager role: Sales filter by manager's country. CFO role: Human Resources filter = TRUE()",
+        "C. Manager role: Human Resources filter by email. CFO role: Country filter by email",
+        "D. Manager role: Country filter = USERPRINCIPALNAME(). CFO role: Human Resources = FALSE(), Country = ALL"
+      ],
+      "a": "A",
+      "e": "Manager role: filter Country[Email] = USERPRINCIPALNAME() so they only see their country's data (propagates to Sales and HR via relationships). CFO role: Human Resources filter = FALSE() blocks all HR data while having no filter on Sales, allowing all sales data.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have a Power BI semantic model with two tables as shown in an exhibit (not available). There is an active many-to-one relationship and an inactive many-to-one relationship between the same two tables.\n\n─ REQUIREMENTS ─\nIdentify how many active relationships can exist between two tables, and what to do with the inactive one.",
+      "o": [
+        "Multiple active relationships are allowed; set cross-filter direction to Both.",
+        "Only one active relationship is allowed; delete the inactive many-to-one relationship.",
+        "Only one active relationship is allowed; set the current relationship as inactive first.",
+        "Two active relationships are allowed; use USERELATIONSHIP to manage them."
+      ],
+      "a": "B",
+      "e": "Power BI Desktop allows only a single active relationship between two tables at a time. To ensure a default relationship, you should first set the current relationship as inactive, then activate the desired one. Making the other relationship inactive first is the proper procedure.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a table with: City, Total Sales, Occupation.\n\nYou create a Key Influencers visualization.\n\n─ REQUIREMENTS ─\nIdentify the metric to analyze and the field explaining it.",
+      "o": [
+        "Analyze: Total Sales | Explain by: Occupation",
+        "Analyze: Occupation | Explain by: Total Sales",
+        "Analyze: City | Explain by: Occupation",
+        "Analyze: Total Sales | Explain by: City"
+      ],
+      "a": "A",
+      "e": "In Key Influencers, the metric being analyzed goes in the Analyze field (Total Sales). The potential influencing fields go in Explain By (Occupation). The visual then determines how Occupation affects Total Sales.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a report page with visuals as shown in an exhibit (not available). A map visual has the cross-filter icon active.\n\n─ REQUIREMENTS ─\n(1) Will selecting an item on the map affect the other visuals?\n(2) What type of interaction does the map apply?",
+      "o": [
+        "Will not affect other visuals | Cross-filter",
+        "Will affect other visuals | Cross-highlight",
+        "Will not affect other visuals | Cross-highlight",
+        "Will affect other visuals | No impact"
+      ],
+      "a": "A",
+      "e": "Maps can only cross-filter (not cross-highlight) other visuals. The cross-filter icon removes data that does not match. Cross-highlight dims unrelated data instead of removing it, but maps only support cross-filter.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have a collection of HR reports. You need a visualization showing historical employee counts and predicting trends for the next six months.\n\nWhich type of visualization should you use?",
+      "o": [
+        "Ribbon chart",
+        "Scatter chart",
+        "Line chart",
+        "Key influencers"
+      ],
+      "a": "C",
+      "e": "Line charts support forecast capability in the Analytics pane, which is ideal for showing historical trends and predicting future values. The forecast feature requires time series data on the axis with a single line.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou plan to use Power BI Desktop to create a bug tracking dashboard that will pull data from Analytics in Azure DevOps.\nFrom Power BI Desktop, you need to configure a data connector to authenticate to Azure DevOps. The solution must meet the following requirements:\n\n▸  REQUIREMENTS\n\n  • Use Analytics views\n  • Filter data from the cloud\n\n▸  QUESTION\n\n  Which connector should you use?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. OData queries",
+        "B. Azure DevOps (Boards only)",
+        "C. Azure DevOps Server (Boards only)",
+        "D. OData Feed"
+      ],
+      "a": "D",
+      "e": "OData Feed connector is the correct choice. Azure DevOps Analytics views are exposed through an OData endpoint. The OData Feed connector authenticates to Azure DevOps Analytics, supports server-side filtering (filtering in the cloud before import), and is the recommended approach for Analytics views.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI model with a Date table and a Sales table. The Date table relates to Sales by Date columns. You have a measure: Total Sales = SUM(Sales[Sale]).\n\n▸  QUESTION\n\n  You need a measure named Previous Quarter showing sales one quarter before the selected period.\n  Which DAX calculation should you use?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. CALCULATE([Total Sales], DATEADD(Date[Date], -1, QUARTER))",
+        "B. CALCULATE([Total Sales], DATESQTD(Date[Date]))",
+        "C. TOTALQTD([Total Sales], Date[Date])",
+        "D. CALCULATE([Total Sales], PARALLELPERIOD(Date[Date], 1, QUARTER))"
+      ],
+      "a": "A",
+      "e": "DATEADD with -1 and QUARTER shifts the date context back one full quarter. PARALLELPERIOD also shifts but shifts forward. DATESQTD and TOTALQTD calculate quarter-to-date, not previous quarter.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have a sales summary page showing totals by region. Users need to right-click a region and see daily transactions for that region. What should you configure?",
+      "a": "D",
+      "o": [
+        "Cross-filter",
+        "Slicer sync",
+        "Drillthrough page with region as drillthrough field",
+        "Tooltip page"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "A drillthrough page with Region as a drillthrough field allows users to right-click a data point and navigate to the detail page."
+    }
+  ]
+}

@@ -1,0 +1,799 @@
+{
+  "exam": 3,
+  "total": 62,
+  "exam_minutes": 100,
+  "questions": [
+    {
+      "q": "You have a Power BI model with an Expenses table: Date, Amount, Category, Expense ID, Employee ID. Each expense has a unique Expense ID.\n\nYou need a DAX measure to calculate the total amount of expenses.\n\nWhich DAX expression should you use?",
+      "o": [
+        "SUM('Expenses'[Amount])",
+        "MAX('Expenses'[Amount])",
+        "SUM('Expenses'[Expense ID])",
+        "COUNT('Expenses'[Amount])"
+      ],
+      "a": "A",
+      "e": "SUM('Expenses'[Amount]) adds all values in the Amount column, which is exactly what is needed for total expenses. MAX returns the highest value. SUM of Expense ID would add IDs which is meaningless. COUNT counts rows, not amounts.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a clustered bar chart with Salary as the value and Employee as the axis. You need a reference line to show which employees are above the median salary.\n\nSolution: You create an average line using the Salary measure.\n\nDoes this meet the goal?",
+      "o": [
+        "Yes",
+        "No"
+      ],
+      "a": "B",
+      "e": "No. Average and Median are different measures. The median (50th percentile) is affected by distribution shape while the average is not. For skewed salary distributions, these can differ significantly.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have a calculated table defined as: ProductList = INTERSECT ( ProductsGroupA, ProductsGroupB )\n\nWhich rows will be returned in ProductList?",
+      "o": [
+        "All the rows in ProductsGroupB that have a matching row in ProductsGroupA",
+        "All the rows in both tables",
+        "All the rows in ProductsGroupA that have a matching row in ProductsGroupB",
+        "All the rows in ProductsGroupA that have no matching row in ProductsGroupB"
+      ],
+      "a": "C",
+      "e": "The DAX function INTERSECT returns the common rows between two tables. It performs an inner join-like operation. Only rows that exist in both tables (based on matching column values) are returned. Option A describes a right-join-like result, B describes UNION, D describes EXCEPT.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a Sales table: Order ID, Product ID, Sales Date, Sales Amount.\n\nYou need a DAX measure to return total sales amount for the same dates in the previous year.\n\n─ REQUIREMENTS ─\nSelect the appropriate functions to complete the measure.\n\nNOTE: Each correct selection is worth one point.",
+      "o": [
+        "CALCULATE | SAMEPERIODLASTYEAR",
+        "SUM | DATEADD",
+        "CALCULATE | PREVIOUSMONTH",
+        "CALCULATETABLE | SAMEPERIODLASTYEAR"
+      ],
+      "a": "A",
+      "e": "CALCULATE modifies filter context for the time shift. SAMEPERIODLASTYEAR returns a table of dates exactly matching the current period from the previous year. It works best with a proper date table marked as a date table in the model.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You need to create a date table covering January 1, 2020 to December 31, 2025. Which DAX function generates a continuous range of dates?",
+      "a": "B",
+      "o": [
+        "CALENDARAUTO",
+        "CALENDAR",
+        "DATE",
+        "DATETABLE"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "CALENDAR(start_date, end_date) generates a contiguous range of dates between the specified start and end dates."
+    },
+    {
+      "q": "You have a Power BI semantic model named Model1 with DimDate and FactSales. Active relationship between them. DimDate is marked as the date table. FactSales has sales data.\n\nMeasure: Previous Year Sales = CALCULATE([Sales Amount], PREVIOUSYEAR('Date'[Date]))\n\nA report has a page-level filter set to May 9, 2024. The Previous Year Sales measure is in a card visual.\n\nWhich value will appear?",
+      "o": [
+        "10",
+        "15",
+        "35",
+        "60"
+      ],
+      "a": "B",
+      "e": "PREVIOUSYEAR shifts the filter context back one year while keeping the same date grain. With the filter on May 9, 2024, the measure evaluates Sales Amount for May 9, 2023. The sales amount for that date is 15.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You use DirectQuery with an Azure SQL database that has its own row-level security. Power BI RLS roles are also defined. How do these interact?",
+      "a": "C",
+      "o": [
+        "Power BI RLS overrides SQL RLS",
+        "SQL RLS overrides Power BI RLS",
+        "Both apply with Power BI RLS evaluated first",
+        "They cannot be used together"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Both apply. Power BI RLS filters data first, then the query is sent to SQL Server where its own RLS applies."
+    },
+    {
+      "q": "You have a report with four pages, each with a Country slicer. You need Page 1 selection to apply to Pages 2 and 3 but NOT Page 4.\n\nWhat should you do?",
+      "o": [
+        "Remove Country slicer from Pages 1-3. Add Country to page-level filters.",
+        "Remove Country slicer from Pages 1-3. Add Country to report-level filters.",
+        "Move Country slicer from Pages 2-3 to Page 1.",
+        "Sync the Country slicer on Pages 1, 2, and 3."
+      ],
+      "a": "D",
+      "e": "Syncing the Country slicer on Pages 1, 2, and 3 ensures selections from Page 1 propagate to Pages 2 and 3. Page 4's slicer is not synced, so it remains unaffected. Report-level filters would affect all pages, including Page 4.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "Your admin wants to audit who viewed a specific report and when. Where can this information be found?",
+      "a": "C",
+      "o": [
+        "Report settings",
+        "Usage metrics report",
+        "Power BI activity log (audit log in Purview)",
+        "Workspace settings"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "The Power BI activity log in Microsoft 365 Purview captures user activities including report views, exports, and shares."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI report for the procurement department with Suppliers and LineItems tables. One-to-many from Suppliers to LineItems. Visuals need: Supplier Name, Invoice ID, Invoice Date, Price.\n\n▸  QUESTION\n\n  You need to minimize dataset size without affecting visuals.\n  What should you do?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Merge Suppliers and LineItems",
+        "B. Remove the LineItems[Description] column",
+        "C. Remove rows where LineItems[Invoice Date] is before last month",
+        "D. Group LineItems by Invoice ID and Date with sum of Price"
+      ],
+      "a": "B",
+      "e": "Description is not used in any visual, so removing it reduces model size. Merging tables increases size. Removing historical rows affects visuals needing historical data. Grouping doesn't reduce size if all rows are kept.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have a Power BI semantic model with tables: Customer, Geography, Sales (Import), Forecast (DirectQuery). All use the same data source. You need to reduce limited relationships by changing storage modes without affecting data latency.\n\n─ REQUIREMENTS ─\nSelect the appropriate storage mode for Customer and Geography tables.",
+      "o": [
+        "Customer: Dual | Geography: DirectQuery",
+        "Customer: Import | Geography: Import",
+        "Customer: DirectQuery | Geography: Dual",
+        "Customer: Dual | Geography: Import"
+      ],
+      "a": "A",
+      "e": "Dual mode lets Customer act as Import when queried with Import tables and DirectQuery when queried with DirectQuery tables. Geography in DirectQuery always queries the source live, suitable for tables that need real-time data or are too large to import.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You need a measure that calculates sales for the same period last year. Which DAX functions should you use?",
+      "a": "CALCULATE,SAMEPERIODLASTYEAR,'Date'[Date]",
+      "o": [],
+      "dd": [
+        "CALCULATE",
+        "SAMEPERIODLASTYEAR",
+        "'Date'[Date]",
+        "TOTALYTD",
+        "DATEADD",
+        "PREVIOUSYEAR"
+      ],
+      "t": "dd",
+      "answer_explanation": "CALCULATE evaluates an expression, SAMEPERIODLASTYEAR shifts the date context back one year."
+    },
+    {
+      "q": "You have a Power BI model with an Employees table containing: Employee ID, First Name, Last Name, Department, Salary. Each employee is uniquely identified by Employee ID.\n\nYou need a DAX measure to calculate the average salary of all employees in the Sales department.\n\nWhich DAX expression should you use?",
+      "o": [
+        "DISTINCTCOUNT('Employees'[Salary])",
+        "CALCULATE(DISTINCTCOUNT('Employees'[Salary]), 'Employees'[Department] = \"Sales\")",
+        "CALCULATE(AVERAGE('Employees'[Salary]), 'Employees'[Department] = \"Sales\")",
+        "AVERAGE('Employees'[Salary])"
+      ],
+      "a": "C",
+      "e": "CALCULATE modifies filter context to limit to Sales department. AVERAGE computes the average of the filtered set. Option A counts distinct salaries (not average), B counts distinct salaries in Sales dept, D averages all departments (no filter).",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a report page with a card, a matrix, and a bar chart. When a user drills down in the matrix, the card and bar chart must remain unaffected. When a user selects a cell in the matrix, the card and bar chart must update.\n\nWhat should you configure?",
+      "o": [
+        "Set matrix drill down filters to Selected Visual only",
+        "Set matrix drill down filters to Entire Page",
+        "Edit interactions of the bar chart to None",
+        "Edit interactions of the card to Filter"
+      ],
+      "a": "A",
+      "e": "The 'Apply drill down filters to' option in the matrix Format tab controls which visuals are affected by drill-down. Setting it to 'Selected Visual' means drill-down only affects the matrix itself (not the card/bar chart), while cell selection still cross-filters other visuals normally.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You need to create a field that calculates profit per row in the Sales table and is stored in the model. The value should not change with filter context. What should you create?",
+      "a": "A",
+      "o": [
+        "Calculated column",
+        "Measure",
+        "Calculated table",
+        "What-if parameter"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "A calculated column is evaluated row-by-row at refresh time and stored. Measures are evaluated dynamically based on filter context."
+    },
+    {
+      "q": "You need to allow report viewers to interactively filter data by Year and Region. Users should see the available options. What should you add to the report?",
+      "a": "B",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "Slicers are visual filters that display available options to users, making them ideal for interactive filtering."
+    },
+    {
+      "q": "You need to use AI insights to add enhanced data from customer feedback. Requirements:\n• What customers most often provide feedback about\n• Whether customers like your company's product\n• The language of the feedback\n\n─ REQUIREMENTS ─\nDrag the correct AI service for each output.",
+      "o": [],
+      "a": "Key Phrase Extraction | Sentiment Analysis | Language Detection",
+      "t": "dd",
+      "ex": 3,
+      "dd": [
+        "Key Phrase Extraction — extracts important words and phrases about what customers discuss most",
+        "Sentiment Analysis — determines if feedback is positive, negative, or neutral",
+        "Language Detection — identifies the language of the feedback text"
+      ],
+      "e": "Key Phrase Extraction identifies common topics. Sentiment Analysis determines positive/negative tone. Language Detection identifies the feedback language. These Azure Cognitive Services are available through Power BI's AI insights."
+    },
+    {
+      "q": "You create multiple bookmarks that change both the page state and slicer selections. The bookmarks with slicer changes aren't working together. What should you use?",
+      "a": "C",
+      "o": [
+        "Bookmark with all properties",
+        "Bookmark group",
+        "Bookmark with selected visuals only",
+        "Button actions with page navigation"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Bookmark groups allow multiple bookmarks to be applied together, controlling different aspects (page state, slicers)."
+    },
+    {
+      "q": "You need to configure row-level security in the Power BI service after defining roles in Power BI Desktop. What steps should you take?",
+      "a": "Publish the report,Go to dataset settings,Manage security,Add users to roles",
+      "o": [],
+      "dd": [
+        "Publish the report",
+        "Go to dataset settings",
+        "Manage security",
+        "Add users to roles",
+        "Define roles",
+        "Create measures"
+      ],
+      "t": "dd",
+      "answer_explanation": "After publishing, go to the dataset in Power BI service, select Security, then add users to the RLS roles defined in Desktop."
+    },
+    {
+      "q": "You have a Power BI data model with tables Sales and Date. Sales contains measures: Order Quantity, Product Cost, Sales Amount.\n\nYou need to create a MATRIX visual. In which section of the Fields well should you place the measures?\n\n─ REQUIREMENTS ─\nMeasures need to display values in the matrix cells.",
+      "o": [
+        "Columns",
+        "Rows",
+        "Values",
+        "Drill through"
+      ],
+      "a": "C",
+      "e": "In a Matrix visual, measures are placed in the Values section. The Rows section cannot accept measures directly. The Values section is where numeric aggregations and measures go to display in the matrix cells.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a clustered bar chart with Salary as the value and Employee as the axis. You need a reference line to show which employees are above the median salary.\n\nSolution: You create a percentile line using the Salary measure and set percentile to 50%.\n\nDoes this meet the goal?",
+      "o": [
+        "Yes",
+        "No"
+      ],
+      "a": "A",
+      "e": "Yes. The median is the 50th percentile. Creating a percentile line at 50% using the Salary measure correctly identifies the median salary, allowing you to see which employees are above it.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have a dashboard with tiles pinned from a single report. You need to modify the dashboard appearance as shown in the Modified exhibit.\n\nWhat should you do?",
+      "o": [
+        "Change the report theme.",
+        "Change the dashboard theme.",
+        "Edit the details of each tile.",
+        "Create a custom CSS file."
+      ],
+      "a": "B",
+      "e": "Dashboard themes apply color and formatting to the entire dashboard, changing the appearance of all pinned tiles. Report themes affect only the report, not the dashboard. CSS is not supported in Power BI dashboards.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have a Power BI semantic model named Model1 that runs in Import storage mode.\n\nWhich two actions reduce the size of Model1? (Choose two.)\n\nNOTE: Each correct selection is worth one point.",
+      "o": [
+        "Summarize the detail data.",
+        "Upgrade to Power BI Premium.",
+        "Implement row-level security (RLS).",
+        "Optimize the column data types.",
+        "Change the active relationships between tables to inactive relationships."
+      ],
+      "a": "AD",
+      "e": "Summarizing detail data (e.g., daily to monthly) reduces rows in memory. Optimizing column data types (e.g., using integers instead of strings) improves VertiPaq compression. Premium does not reduce size. RLS controls access but not size. Inactive relationships do not reduce model size.",
+      "t": "hs",
+      "ex": 2
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have data in a Microsoft Excel worksheet with the following columns: Product, Discount. The Discount column contains some error values.\n\n▸  REQUIREMENTS\n\n  • If the discount column returns an error, a discount of 0.05 must be used\n  • All rows of data must be maintained\n  • Administrative effort must be minimized\n\n▸  QUESTION\n\n  You need to use Power Query to clean and transform the dataset. The solution must meet the following requirements:\n  What should you do in Power Query Editor?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Select Replace Errors",
+        "B. Edit the query in the Query Errors group",
+        "C. Select Remove Errors",
+        "D. Select Keep Errors"
+      ],
+      "a": "A",
+      "e": "Select Replace Errors is correct. It replaces error values with a specified value (0.05) while maintaining all rows. Remove Errors would delete rows, and Keep Errors would only keep error rows. Editing in Query Errors group would also work but requires more administrative effort.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You need to create a parameter that allows users to select a Customer ID using manually entered values to populate a slicer. Which parameter types should you configure?",
+      "a": "ADE",
+      "o": [
+        "Text parameter with predefined list",
+        "Numeric parameter",
+        "Date parameter",
+        "Customer ID parameter in Power Query",
+        "What-if parameter"
+      ],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "A combination of parameter types enables slicer-based customer selection with manual entry support."
+    },
+    {
+      "q": "You have a Power BI report rendered on a vertical display. You need to maximize the screen area used.\n\nWhat should you do?",
+      "o": [
+        "From Canvas background, configure Image fit.",
+        "From Canvas settings, set a custom width and height.",
+        "Select Personalize visuals.",
+        "Enable the Pages pane."
+      ],
+      "a": "B",
+      "e": "Setting custom canvas dimensions in Power BI Desktop matches the report aspect ratio to the vertical display. This maximizes usable screen area. Image fit applies to background images only, not the overall report layout.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have a Country slicer on page 1 that should filter all visuals on pages 2 and 3. Currently it only affects page 1. What should you do?",
+      "a": "Sync the Country slicer across pages",
+      "o": [],
+      "dd": [
+        "Move the Country slicer from page 2 and page 3 to page 1",
+        "Sync the Country slicer across all pages",
+        "Apply Country as a page-level filter",
+        "Create a bookmark"
+      ],
+      "t": "dd",
+      "answer_explanation": "Sync slicers across pages propagates the slicer selection to the same slicer field on all target pages."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI report that imports a date table and a sales table from an Azure SQL database data source. The sales table has the following date foreign keys: Due Date, Order Date, Delivery Date.\n\n▸  QUESTION\n\n  You need to support the analysis of sales over time based on all the date foreign keys.\n  Proposed Solution: From Power Query Editor, you rename the date query as Due Date. You reference the Due Date query twice to make the queries for Order Date and Delivery Date.\n  Does this meet the goal?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Yes",
+        "B. No"
+      ],
+      "a": "A",
+      "e": "Yes. Renaming the date query and referencing it creates separate date tables for each role (Due Date, Order Date, Delivery Date). Each can have an active relationship with the sales table, supporting analysis over time by all three date foreign keys.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou import two Microsoft Excel tables named Customer and Address into Power Query. The Customer table contains the following columns: Customer ID, Address ID, Name, Email. The Address table contains the following columns: Address ID, City, State/Region, Country, Postal Code. Each Customer ID represents a unique customer. Each Address ID represents a unique address.\n\n▸  QUESTION\n\n  You need to create a query that has one row per customer. Each row must contain City, State/Region, and Country for each customer.\n  What should you do?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Merge the Customer and Address tables",
+        "B. Group the Customer and Address tables by the Address ID column",
+        "C. Transpose the Customer and Address tables",
+        "D. Append the Customer and Address tables"
+      ],
+      "a": "A",
+      "e": "A Merge queries operation joins two existing tables together based on matching values from one or multiple columns. You need to merge Customer (Address ID) with Address (Address ID) using a left outer join to bring in City, State/Region, and Country for each customer. Note: Merge = JOIN, Append = UNION.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have two Excel workbooks in OneDrive, each with a Sales table sharing the same structure. You need to combine them into a single table and publish a separate report and dataset. Which storage mode should you use for each file?",
+      "a": "Import,DirectQuery",
+      "o": [],
+      "dd": [
+        "Import",
+        "DirectQuery",
+        "Dual",
+        "Composite"
+      ],
+      "t": "dd",
+      "answer_explanation": "The report file uses Import to load data locally. The dataset uses DirectQuery to maintain a live connection to OneDrive for always-current data."
+    },
+    {
+      "q": "You have a report with three pages, all having the same slicers. You need filters applied on Page1 to apply to Page1 and Page3 only.\n\nWhat should you do?",
+      "o": [
+        "On each page, modify the interactions of the slicer.",
+        "Enable visibility of slicers on Page1 and Page3; disable on Page2.",
+        "Sync the slicers on Page1 and Page3.",
+        "Apply report-level filters instead of slicers."
+      ],
+      "a": "C",
+      "e": "Syncing slicers across specific pages (Page1 and Page3) ensures selections apply to both while Page2 remains unaffected. Editing interactions controls cross-filtering within a page, not across pages. Visibility does not affect functionality.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI report with a 550 MB PBIX file, single page with 25 visuals (15 AppSource, 10 default). Users report slow loading.\n\n▸  QUESTION\n\n  What should you recommend?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Change DAX measures to use iterator functions",
+        "B. Implement row-level security (RLS)",
+        "C. Replace default visuals with AppSource visuals",
+        "D. Split the visuals onto multiple pages"
+      ],
+      "a": "D",
+      "e": "Splitting visuals onto multiple pages is the most effective solution. A single page with 25 visuals (especially 15 AppSource which are resource-heavy) causes slow rendering. Multiple pages reduce the number of visuals loaded at once.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You are building a Power BI model with the following tables: Customer, Date, Sales, and SalesAggregate. Customer must refresh daily, Date once every three years, Sales in near real-time, and SalesAggregate once per week. You need to select the appropriate storage mode for each table while minimizing visual load times.",
+      "a": "Dual,Dual,DirectQuery,Import",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "Customer and Date (dimension tables) should use Dual mode to support both Import and DirectQuery. Sales needs DirectQuery for near real-time data. SalesAggregate uses Import for weekly refresh."
+    },
+    {
+      "q": "You want users to dynamically switch between measures (Sales, Quantity, Profit) in a visual using a slicer. What feature enables this?",
+      "a": "B",
+      "o": [
+        "Bookmarks",
+        "Field parameters",
+        "Calculation groups",
+        "What-if parameters"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Field parameters let users dynamically select which measure, dimension, or field to display in a visual."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Microsoft Excel file in a Microsoft OneDrive folder. The file must be imported to a Power BI dataset.\n\n▸  QUESTION\n\n  You need to ensure that the dataset can be refreshed in powerbi.com.\n  Which two connectors can you use to connect to the file? Each correct answer presents a complete solution.\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Excel Workbook",
+        "B. Text/CSV",
+        "C. Folder",
+        "D. SharePoint folder",
+        "E. Web"
+      ],
+      "a": "DE",
+      "e": "To refresh in powerbi.com without an on-premises gateway, you must use Web or SharePoint folder connectors. These connectors allow Power BI service to access the file directly. Excel Workbook and Folder connectors would require a gateway for refresh in the service.",
+      "t": "hs",
+      "ex": 1
+    },
+    {
+      "q": "You have a Power BI semantic model with three tables:\n• Products (ProductID, ProductName) — dimension table\n• OrderHistory (OrderID, ProductID, OrderDate) — fact table\n• Date (Year, Date, Week, Month) — dimension table\n\n─ REQUIREMENTS ─\nDefine relationships: Products to OrderHistory, and OrderHistory to Date.\n\nSelect the correct cardinality for each relationship.",
+      "o": [
+        "Products → OrderHistory: One-to-Many | OrderHistory → Date: One-to-One",
+        "Products → OrderHistory: Many-to-One | OrderHistory → Date: Many-to-One",
+        "Products → OrderHistory: One-to-One | OrderHistory → Date: One-to-Many",
+        "Products → OrderHistory: Many-to-Many | OrderHistory → Date: One-to-One"
+      ],
+      "a": "A",
+      "e": "One product can appear in many orders → One-to-Many from Products to OrderHistory. A Date table typically has one row per unique date, and each order has one date → One-to-One from OrderHistory to Date.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have an Azure SQL database with frequently updated sales transactions. Reports must detect fraudulent transactions within five minutes of an update. How should you configure the connection?",
+      "a": "D",
+      "o": [
+        "Add a SQL statement",
+        "Set Command timeout in minutes",
+        "Set Data Connectivity to Import",
+        "Set Data Connectivity to DirectQuery"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "DirectQuery queries the source in real-time, ensuring data is current within minutes. Import would only reflect data from the last refresh."
+    },
+    {
+      "q": "You need to quickly create a measure for year-over-year growth without manually writing DAX. What Power BI feature helps you do this?",
+      "a": "B",
+      "o": [
+        "Quick Insights",
+        "Quick Measures",
+        "Auto-measures",
+        "Smart narratives"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Quick Measures provides a dialog to create common DAX calculations (YoY%, running total, etc.) without writing code."
+    },
+    {
+      "q": "You have a Sales_Spreadsheet query that connects to an Excel file. You need to create a new query that uses the same transformations without duplicating steps. What Power Query feature should you use?",
+      "a": "Reference the Sales_Spreadsheet query",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "Referencing creates a new query that inherits all transformations from the source query, avoiding duplication."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are enhancing a Power BI model. You need to create a measure that returns the year-to-date total sales from the same date of the previous calendar year.\n\n▸  QUESTION\n\n  Which DAX functions should you use in order?\n  = [Box1](SUM(Sales[Amount]), [Box3](...))\n\n──────────────────────────────────────────────────",
+      "dd": [
+        "CALCULATE",
+        "SUM",
+        "DATESBETWEEN"
+      ],
+      "a": "CALCULATE\nSUM\nDATESBETWEEN",
+      "e": "CALCULATE modifies filter context. SUM aggregates sales. DATESBETWEEN accepts two date parameters for the date range. Formula: CALCULATE(SUM(Sales[Amount]), DATESBETWEEN('Date'[Date], SAMEPERIODLASTYEAR(...), ...)).",
+      "t": "dd",
+      "ex": 1
+    },
+    {
+      "q": "You are using the Key Influencers visual to identify which factors affect the quantity of items sold. Explain By fields: Customer Country, Product Category, Supplier Country, Sales Employee, Supplier Name, Product Name, Customer City.\n\nBased on the visual (referenced in exhibit), what can you identify?",
+      "o": [
+        "Customers in Austria order 18.8 more units than the average order quantity.",
+        "Customers in Boise order 20.37 percent more than the average order quantity.",
+        "Product Category positively influences the quantity per order.",
+        "Customers in Cork order lower quantities than average."
+      ],
+      "a": "A",
+      "e": "The Key Influencers visual shows the average quantity of units. Austria shows 18.8 more units than average. The visual displays unit differences, not percentages (eliminating B).",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You are profiling data in Power Query Editor. Column1 has column statistics shown in an exhibit (not available). There are 20 distinct values. The value 'Peer, flowering' appears above 'Elm, American' in value distribution.\n\n─ REQUIREMENTS ─\n(1) How many distinct values occur?\n(2) Which value has the highest count?",
+      "o": [
+        "20 distinct values | Elm, American",
+        "20 distinct values | Peer, flowering",
+        "15 distinct values | Elm, American",
+        "25 distinct values | Peer, flowering"
+      ],
+      "a": "B",
+      "e": "Distinct means the number of different values regardless of frequency. Unique means values appearing only once. From the exhibit, there are 20 distinct values and Peer, flowering appears above Elm, American in the value distribution, meaning it has a higher count.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You need to implement row-level security so that each salesperson sees only their own data. The username is stored in the data. Which DAX function should you use in the RLS role?",
+      "a": "B",
+      "o": [
+        "USEROBJECTID()",
+        "USERNAME()",
+        "USERPRINCIPALNAME()",
+        "CURRENTUSER()"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "USERNAME() returns the username of the authenticated user, which can be compared against the username column in the data."
+    },
+    {
+      "q": "You have a line chart comparing six months of sales for two departments. You need to increase accessibility.\n\nWhat should you do?",
+      "o": [
+        "Configure a unique marker for each series.",
+        "Configure a distinct color for each series.",
+        "Replace long text with abbreviations.",
+        "Move important information to a tooltip."
+      ],
+      "a": "A",
+      "e": "Unique markers (circles, squares, triangles) make each series distinguishable even without color, helping users with color vision deficiency. Colors alone are insufficient for accessibility.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You want to create a reusable report template that preserves measures, relationships, and formatting but not the data. What file format should you save?",
+      "a": "C",
+      "o": [
+        "PBIX",
+        "PBIDS",
+        "PBIT",
+        "PBIP"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "PBIT (Power BI Template) saves the model structure without data, allowing users to connect to their own data source."
+    },
+    {
+      "q": "You use Power Query Editor to ingest data with 250,000 rows. The data includes:\n• Value column: numbers without decimals (e.g., 10, -5, 0)\n• Datetime column: dates without time values\n\n─ REQUIREMENTS ─\nOptimize data model size.\n\nSelect the appropriate data type for each column.",
+      "o": [
+        "Value: Whole Number | Datetime: Date",
+        "Value: Decimal | Datetime: DateTime",
+        "Value: Text | Datetime: Time",
+        "Value: Whole Number | Datetime: DateTime"
+      ],
+      "a": "A",
+      "e": "Whole Number for values without decimals minimizes storage. Date for datetime values without time components reduces storage by eliminating the time portion. This optimization at scale (250K rows) significantly reduces model size.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "Your team tracks monthly sales targets. You want to see current progress against the goal with check-in capabilities. What Power BI feature should you use?",
+      "a": "D",
+      "o": [
+        "KPI visual",
+        "Dashboard tile",
+        "Scorecard in Power BI Goals (Metrics)",
+        "Decomposition Tree"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Power BI Goals (Metrics) allows creating scorecards with tracked metrics, check-ins, and status updates."
+    },
+    {
+      "q": "A calculated column in a large fact table increases the PBIX file size significantly. What alternative should you use to achieve similar results without increasing file size?",
+      "a": "D",
+      "o": [
+        "Calculated table",
+        "Power Query custom column",
+        "Measure",
+        "Merged query"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Measures are calculated at query time and don't increase the model size. Calculated columns are stored and consume memory."
+    },
+    {
+      "q": "You have a Geography table with City, State, and Country columns. You need Power BI to recognize these as geographic fields for map visualizations. What should you configure?",
+      "a": "A",
+      "o": [
+        "Assign Data Category to each column",
+        "Set default summarization",
+        "Create a hierarchy",
+        "Enable geographic detection"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Data Category (e.g., City, State/Province, Country) tells Power BI how to interpret the field for map visuals."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Sales table with columns: Order Line ID, Product ID, Unit Price, Order ID, Quantity. Orders are uniquely identified by Order ID and can have multiple order lines. Each order line has a different Product ID.\n\n▸  QUESTION\n\n  You need a DAX measure counting the number of orders.\n  Which formula should you use?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. COUNT('Sales'[Order ID])",
+        "B. COUNTA('Sales'[Order ID])",
+        "C. COUNTROWS('Sales')",
+        "D. DISTINCTCOUNT('Sales'[Order ID])"
+      ],
+      "a": "D",
+      "e": "DISTINCTCOUNT('Sales'[Order ID]) counts each unique Order ID once. Since orders can have multiple lines (multiple rows per Order ID), COUNT or COUNTROWS would overcount. DISTINCTCOUNT gives the correct number of distinct orders.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You need to transform a date column to show only the day number. What steps should you perform?",
+      "a": "Change the data type,Extract the day",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "First ensure the column is a Date type, then extract the day component using the Date.Day function or the Extract feature."
+    },
+    {
+      "q": "You have sales data for four years across three products. You need to display total sales by quarter categorized by product, showing trends in both total and individual product sales.\n\nWhich visual type?",
+      "o": [
+        "Area chart",
+        "Clustered column chart",
+        "Stacked area chart",
+        "Line chart"
+      ],
+      "a": "C",
+      "e": "A stacked area chart shows total sales trend (top edge) and individual product trends (each layer), making it ideal for part-to-whole relationships over time. Clustered column charts show individual but not cumulative trend clearly.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You use Power Query Editor and see error values in the discount column. You need to replace errors with 0.05 while keeping all rows. What three actions should you perform in sequence?",
+      "a": "Select the discount Column,Select Replace Errors to replace each error value with 0.05,Change Data Type to Decimal Number",
+      "o": [],
+      "dd": [
+        "Select the discount Column",
+        "Select Replace Errors to replace each error value with 0.05",
+        "Change Data Type to Decimal Number",
+        "Remove errors",
+        "Filter rows",
+        "Replace values"
+      ],
+      "t": "dd",
+      "answer_explanation": "Select the column, use Replace Errors to substitute error values with 0.05, then ensure the data type is Decimal for proper calculations."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a PBIX file that contains sensitive information.\n\nYou need to secure the information to meet the following requirements:\n• Only internal users must be able to open the file if the file is shared via email.\n• Once the file is published, only internal users must be able to open the semantic model and the report downloaded from the Power BI service.\n\n▸  QUESTION\n\n  What should you do?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. From Microsoft Power BI Desktop, apply a sensitivity label.",
+        "B. Certify the semantic model and the report.",
+        "C. Use a live connection for the file.",
+        "D. From the Power BI service, apply a sensitivity label."
+      ],
+      "a": "A",
+      "e": "From Microsoft Power BI Desktop, apply a sensitivity label. You can apply sensitivity labels directly in Power BI Desktop before publishing. When you publish a PBIX file with a sensitivity label, that label (and its associated protection settings) travels with the semantic model and report into the service.",
+      "t": "mc",
+      "ex": 5
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are creating a sales report for the NorthWest region. Data comes from a SQL Server view. The report needs: count of orders by date, sum of sales by date, count of customers, avg quantity per order.\n\n▸  QUESTION\n\n  Which two actions should you take to reduce refresh and query times?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Set data type for SalesOrderNumber to Decimal Number",
+        "B. Remove CustomerKey and ProductKey columns",
+        "C. Remove TaxAmt and Freight columns",
+        "D. Filter data to only the NorthWest region"
+      ],
+      "a": "CD",
+      "e": "C: Remove columns not used in the report (TaxAmt, Freight). D: Reduce rows by filtering to only NorthWest at the source. CustomerKey is needed for customer count, so it cannot be removed.",
+      "t": "hs",
+      "ex": 1
+    },
+    {
+      "q": "You have a table visual with a Profit column. Values above 1000 should be green, between 0-1000 yellow, and negative red. What should you configure?",
+      "a": "C",
+      "o": [
+        "Data colors in format pane",
+        "Conditional formatting with rules",
+        "Field formatting",
+        "Theme JSON"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Conditional formatting with rules allows defining multiple thresholds and corresponding colors for a column."
+    },
+    {
+      "q": "You are using existing reports to build a dashboard viewed frequently in portrait mode on mobile phones.\n\n─ REQUIREMENTS ─\nDrag the four actions in the correct sequence.",
+      "o": [],
+      "a": "Pin items → Open dashboard → Edit mobile view → Rearrange items",
+      "t": "dd",
+      "ex": 3,
+      "dd": [
+        "Pin items from the reports to the dashboard",
+        "Open the dashboard to see the pinned items",
+        "Edit the dashboard mobile view",
+        "Rearrange, resize, or remove items from the mobile layout"
+      ],
+      "e": "Step 1: Pin visuals from existing reports to the dashboard. Step 2: Open the dashboard to verify pinned items. Step 3: Edit the mobile layout view. Step 4: Rearrange and resize items to optimize for portrait mode."
+    },
+    {
+      "q": "You plan to use Power BI to create sales invoices.\n\n─ REQUIREMENTS ─\n• Export invoices as PDF\n• Show all columns and rows clearly",
+      "o": [
+        "A paginated report with a tablix.",
+        "A dashboard with a table.",
+        "An interactive report with a table.",
+        "An interactive report with a matrix."
+      ],
+      "a": "A",
+      "e": "Paginated reports are designed for pixel-perfect, printable layouts. The tablix data region provides precise control over rows and columns for structured invoice output. Interactive reports focus on dynamic exploration, not fixed-format PDF export.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You need to add an automatic text summary that describes the key trends in your report. Which visual provides this?",
+      "a": "B",
+      "o": [
+        "Text Box",
+        "Smart Narrative",
+        "Q&A visual",
+        "Multi-row card"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Smart Narrative auto-generates natural language summaries of the data on the report page."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are creating a quick measure for a monthly rolling average of Sales over time.\n\n▸  QUESTION\n\n  Which quick measure settings should you select? (Select all that apply.)\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Base value: Total Sales",
+        "B. Base value: Sum of Sales",
+        "C. Date: Date",
+        "D. Date: Year",
+        "E. Period: Months",
+        "F. Period: Days"
+      ],
+      "a": "ACE",
+      "e": "For a monthly rolling average: Base value = Total Sales (the measure to average), Date = Date (the date column), Period = Months (the rolling window size of 1 month).",
+      "t": "hs",
+      "ex": 1
+    },
+    {
+      "q": "You need to calculate the sales amount for the last available date in the current filter context. Which DAX function should you use?",
+      "a": "C",
+      "o": [
+        "MAX",
+        "LASTNONBLANK",
+        "CALCULATE(SUM(Sales[Amount]), LASTDATE(Date[Date]))",
+        "ENDOFMONTH"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "LASTDATE returns the last date in the current context. Combined with CALCULATE, it computes the value for that date."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Microsoft Excel file in a Microsoft OneDrive folder. The file must be imported to a Power BI semantic model.\n\n▸  QUESTION\n\n  You need to ensure that the semantic model can be refreshed in PowerBI.com.\n  Which two connectors can you use to connect to the file? Each correct answer presents a complete solution.\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Web",
+        "B. Excel Workbook",
+        "C. Folder",
+        "D. Text/CSV",
+        "E. SharePoint folder"
+      ],
+      "a": "AE",
+      "e": "Web and SharePoint folder connectors allow the Power BI service to access files in OneDrive and refresh without an on-premises gateway. Excel Workbook and Folder connectors would require a gateway for cloud refresh. Text/CSV would need to be pointed to a web-accessible location.",
+      "t": "hs",
+      "ex": 1
+    }
+  ]
+}

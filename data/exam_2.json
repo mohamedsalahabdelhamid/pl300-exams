@@ -1,0 +1,793 @@
+{
+  "exam": 2,
+  "total": 62,
+  "exam_minutes": 100,
+  "questions": [
+    {
+      "q": "You configure a drillthrough page that accepts Product Category as a drillthrough field. When a user drills through from a category, the page shows details. What kind of filter is being passed?",
+      "a": "C",
+      "o": [
+        "Visual level filter",
+        "Page level filter",
+        "Drillthrough filter",
+        "Report level filter"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Drillthrough filters are passed from the source visual to the target page based on the configured drillthrough fields."
+    },
+    {
+      "q": "You have a cleaned Sales query in Power Query Editor. You need to create a new query based on it without duplicating transformation steps. What should you do?",
+      "a": "C",
+      "o": [
+        "Duplicate the query",
+        "Copy and paste the query",
+        "Reference the query",
+        "Create a new query from source"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Referencing a query creates a new query that inherits all upstream transformations without duplicating them."
+    },
+    {
+      "q": "Your organization requires confidential reports to have a sensitivity label applied automatically. Where should you configure this policy?",
+      "a": "B",
+      "o": [
+        "Power BI Desktop options",
+        "Microsoft Purview compliance portal",
+        "Power BI admin portal",
+        "Azure Active Directory"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Sensitivity labels are configured in the Microsoft Purview compliance portal and applied to Power BI content via the admin portal."
+    },
+    {
+      "q": "You have a Power Query query with a Classes column containing comma-separated values (e.g., \"Math,Science,History\"). You need to transform the data so each class value is in its own row.\n\nWhat should you do?",
+      "o": [
+        "Split the Classes column into rows by using a delimiter.",
+        "Unpivot the Classes column.",
+        "Extract the text between delimiters in the Classes column.",
+        "Convert the Classes column into a list."
+      ],
+      "a": "A",
+      "e": "Transform tab > Split Column > By Delimiter > Advanced Options > Split into Rows. This separates each delimited value into its own row. Unpivot is for multiple columns, not single-column splitting. Extract only grabs one portion. Converting to a list does not reshape the table.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have an Invoice table that you want to combine with local data while keeping a live connection to the source. What should you change the table to?",
+      "a": "D",
+      "o": [
+        "Import table",
+        "DirectQuery table",
+        "Dual table",
+        "Composite table"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "A Composite table allows mixing Import and DirectQuery for the same table, enabling local additions with live source connection."
+    },
+    {
+      "q": "You have four sales regions, each with multiple sales managers. RLS is implemented with mail-enabled security groups per role. A sales manager changes to a different region.\n\nHow do you ensure they see the correct data?",
+      "o": [
+        "Change their Power BI license type.",
+        "Edit the RLS setting in Power BI Desktop.",
+        "Manage the dataset permissions.",
+        "Request they be added to the correct Azure AD group."
+      ],
+      "a": "D",
+      "e": "RLS membership is tied to Azure AD groups. Adding the user to the correct group for their new region gives them access to the right data. RLS roles in Power BI reference these groups.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a Power BI report with the Edit relationship page open. Two tables (Table1, Table2) are shown in the exhibit (not available). There is no relationship between them.\n\n─ REQUIREMENTS ─\n(1) If you filter the Code column in Table2, will Table1 be filtered?\n(2) If you add fields from both tables to a table visual, what will the Code column display?",
+      "o": [
+        "Table1 will not be filtered | The Code column will display BLANK",
+        "Table1 will be filtered | The Code column will display values",
+        "Table1 will not be filtered | The Code column will display values",
+        "Table1 will be filtered | The Code column will display BLANK"
+      ],
+      "a": "A",
+      "e": "Without a relationship between tables, filtering one table does not affect the other. When fields from unrelated tables are combined in a visual, Power BI cannot match rows, so fields from the unrelated table display BLANK.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a table with sales data (~1,000 rows). You need to identify outliers.\n\nWhich type of visualization should you use?",
+      "o": [
+        "Area chart",
+        "Scatter plot",
+        "Pie chart",
+        "Donut chart"
+      ],
+      "a": "B",
+      "e": "Scatter plots are ideal for outlier detection as they plot individual data points, making points outside the normal distribution easily visible. Box plots and scatter plots are the standard tools for detecting outliers.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You plan to create a chart showing daily sales over time. You need a dashed horizontal line at the 40th percentile.\n\nHow should you create this?",
+      "o": [
+        "Add a measure: PERCENTILEX.INC(Sales, Sales[Total Sales], 0.40)",
+        "Add a measure: PERCENTILEX.EXC(Sales, Sales[Total Sales], 0.40)",
+        "Add a new percentile line using Total Sales as the measure and 40% as the percentile.",
+        "Create a horizontal line with a fixed value of 24,000."
+      ],
+      "a": "C",
+      "e": "The Analytics pane in Power BI Desktop allows adding percentile lines directly to visuals. Select Percentile Line, choose the measure (Total Sales), and set 40%. This is the simplest and most accurate approach. DAX measures would require additional steps.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI data model analyzing product sales over time. Tables: Product, Sales, Date. Auto date/time is enabled. You need to reduce model size while maintaining analysis by month and quarter.\n\n▸  QUESTION\n\n  Which two actions should you perform?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Create a relationship between Date table and Sales table",
+        "B. Disable the auto date/time option",
+        "C. Create a Date table and select Mark as Date Table",
+        "D. Disable load on the Date table",
+        "E. Remove the relationship between Product and Sales"
+      ],
+      "a": "BC",
+      "e": "B: Disabling auto date/time removes hidden auto-generated date tables, reducing model size. C: Creating a dedicated Date table and marking it as the date table preserves month/quarter analysis and is more storage-efficient.",
+      "t": "hs",
+      "ex": 1
+    },
+    {
+      "q": "You have a report with a bar chart (customer count by segment) and a column chart (sales by month).\n\nWhen a segment is selected in the bar chart, you want to see which portion of total monthly sales belongs to that segment.\n\nHow should visual interactions be set on the column chart?",
+      "o": [
+        "Highlight",
+        "Filter",
+        "No impact",
+        "Drill through"
+      ],
+      "a": "A",
+      "e": "Highlighting shows the related data portion while keeping the rest visible but dimmed. This allows users to see the proportion of sales belonging to the selected segment. Filtering would remove unrelated data entirely, making it impossible to see the proportion.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a Power BI model that contains a table named Sales and a related date table. Sales contains a measure named Total Sales.\n\n▸  QUESTION\n\n  You need to create a measure that calculates the total sales from the equivalent month of the previous year.\n  How should you complete the calculation?\n\n──────────────────────────────────────────────────",
+      "dd": [
+        "CALCULATE",
+        "SAMEPERIODLASTYEAR",
+        "'DATE'[DATE]"
+      ],
+      "a": "CALCULATE\nSAMEPERIODLASTYEAR\n'DATE'[DATE]",
+      "e": "Box 1: CALCULATE - wraps the expression to modify filter context. Box 2: SAMEPERIODLASTYEAR - returns dates shifted one year back. Box 3: 'DATE'[DATE] - the date column to use for the time shift. Complete formula: CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date'[Date]))",
+      "t": "dd",
+      "ex": 1
+    },
+    {
+      "q": "You use Power BI Desktop. An exhibit (not available) shows a date hierarchy named MonthEndDate Date Hierarchy in the Fields pane.\n\n─ REQUIREMENTS ─\nIdentify what created this hierarchy and what happens if you remove it.",
+      "o": [
+        "It was created manually; removing it deletes the column.",
+        "It was created by Auto Date/Time; removing it deletes automatically created hierarchies.",
+        "It was created by a DAX calculated table; removing it breaks relationships.",
+        "It was created by Power Query; removing it requires re-importing data."
+      ],
+      "a": "B",
+      "e": "When Auto Date/Time is enabled, Power BI automatically creates hidden date tables with date hierarchies (Year, Quarter, Month, Day) for every date column. The MonthEndDate Date Hierarchy is one of these. Disabling Auto Date/Time removes all automatically created hierarchies.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "Your model has DimProduct normalized into Product, ProductSubcategory, and ProductCategory. What schema type is this?",
+      "a": "Snowflake schema",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "A snowflake schema normalizes dimension tables into multiple related tables, extending from the central fact table."
+    },
+    {
+      "q": "You have a table visual with a Plant Image column containing URLs. You need to display the actual images instead of URLs.\n\nWhat should you do?",
+      "o": [
+        "From Formatting, set Values > URL icons to On.",
+        "Set Data category of Plant Image to Web URL.",
+        "Set Data type of Plant Image to Binary.",
+        "Set Data category of Plant Image to Image URL."
+      ],
+      "a": "D",
+      "e": "Setting the Data Category to Image URL tells Power BI to render the URLs as images in tables, matrices, slicers, and multi-row cards. Web URL would create clickable links. Binary is not for URL-based images.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "A page-level filter is set to May 9, 2024. A card visual on the page shows 60. A slicer on the same page allows selecting another date. If May 15 is selected on the slicer, what value does the card show?",
+      "a": "B",
+      "o": [
+        "60",
+        "15",
+        "May 9 value",
+        "May 15 value"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Slicer selections override page-level filters for the same field. The card updates to show the value for May 15."
+    },
+    {
+      "q": "You are creating a Power BI report to analyze consumer purchasing patterns from a Transactions table with a numeric Spend field. You need to identify which fields have the greatest impact on Spend.\n\nWhich type of visual should you use?",
+      "o": [
+        "Q&A",
+        "Smart narrative",
+        "Decomposition tree",
+        "Key influencers"
+      ],
+      "a": "D",
+      "e": "Key Influencers analyzes the metric (Spend) and ranks the fields that drive it. It shows which factors have the greatest impact, making it ideal for identifying drivers of a specific metric. Decomposition tree drills across dimensions but does not rank impact.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "Your company has employees in 10 states recently grouped into 3 regions (East, West, North). The data model has state but not region information. A report shows employees by state.\n\nYou need to view employees by region as quickly as possible.\n\nWhat should you do?",
+      "o": [
+        "Create a new aggregation that summarizes by state.",
+        "Create a new aggregation that summarizes by employee.",
+        "Create a new group on the state column with Group type List.",
+        "Create a new group on the state column with Group type Bin."
+      ],
+      "a": "C",
+      "e": "Creating a group (List type) on the State column allows manually assigning states to regions. This is the quickest way to add region groupings without modifying the source data. Binning groups into equal-sized ranges, not custom categories.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You need to analyze a Power BI dataset in Excel using PivotTables while keeping the data connected. What feature enables this?",
+      "a": "C",
+      "o": [
+        "Export to Excel",
+        "Analyze in Excel",
+        "Power BI Publisher for Excel",
+        "OData feed connection"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Analyze in Excel creates a connection from Excel to a Power BI dataset, enabling PivotTable analysis with live data."
+    },
+    {
+      "q": "You have a semantic model with Sales and Quarter fields, and a measure summing Sales. You need to create the visual shown in the exhibit (100% stacked area chart).\n\n─ REQUIREMENTS ─\nNo additional DAX measures.\n\nWhich visual type?",
+      "o": [
+        "Ribbon chart",
+        "Line chart",
+        "100% stacked area chart",
+        "Area chart"
+      ],
+      "a": "C",
+      "e": "A 100% stacked area chart shows proportional contribution of categories over time, with each product category stacked to 100%. Line charts would not show the stacked category distribution shown in the exhibit.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a Power BI report hosted on powerbi.com that displays expenses by month for department managers. You need users to choose between viewing as a line chart or column chart.\n\n─ REQUIREMENTS ─\nMinimize development and maintenance effort.",
+      "o": [
+        "Enable report readers to personalize visuals.",
+        "Create a separate report page for the column chart.",
+        "Add a column chart, bookmark, and button.",
+        "Create a mobile report with a column chart."
+      ],
+      "a": "A",
+      "e": "Enabling the Personalize Visuals feature allows users to change visualization types directly without developer intervention. This minimizes development effort since no bookmarks, buttons, or separate pages are needed.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have a clustered bar chart (X-axis: Sales, Y-axis: Year, 2020-2024). You need a visual calculation showing cumulative total of sales (current year + all previous years).\n\nWhich DAX expression?",
+      "o": [
+        "MOVINGAVERAGE([Sales], 4)",
+        "RUNNINGSUM([Year])",
+        "CALCULATE([Sales], 'Date'[Year] <= MAX('Date'[Year]))",
+        "RUNNINGSUM([Sales])"
+      ],
+      "a": "D",
+      "e": "RUNNINGSUM([Sales]) calculates a cumulative total across the axis (Year), adding current year's sales to all previous years. This is a visual calculation (not a model measure). MOVINGAVERAGE is for moving averages.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a dashboard named DashboardA with a tile named TileA containing a treemap from ReportA. You need to provide users with additional tiles related to TileA's content.\n\n─ REQUIREMENTS ─\nDrag the three actions in the correct sequence.",
+      "o": [],
+      "a": "View Insights → Review visuals → Pin relevant visuals",
+      "t": "dd",
+      "ex": 3,
+      "dd": [
+        "From DashboardA, select TileA options, then select View Insights",
+        "From Focus mode, review the generated visuals",
+        "From Focus mode, pin the relevant visuals to DashboardA"
+      ],
+      "e": "Step 1: Select TileA and choose View Insights to automatically generate related visualizations. Step 2: Review the generated visuals in Focus mode. Step 3: Pin the desired visuals back to DashboardA."
+    },
+    {
+      "q": "You need to calculate the year-to-date sales, but the calculation must respect the user's filter selections on slicers. Which DAX pattern should you use?",
+      "a": "CALCULATE,ALLSELECTED",
+      "o": [],
+      "dd": [
+        "CALCULATE",
+        "ALLSELECTED",
+        "TOTALYTD",
+        "ALL",
+        "FILTER",
+        "SUM"
+      ],
+      "t": "dd",
+      "answer_explanation": "CALCULATE with ALLSELECTED resets filter context while respecting user selections, used inside TOTALYTD."
+    },
+    {
+      "q": "You have reports using financial datasets exported as PDF files. You need to ensure the reports are encrypted.\n\nWhat should you implement?",
+      "o": [
+        "Microsoft Intune policies",
+        "Row-level security (RLS)",
+        "Sensitivity labels",
+        "Dataset certifications"
+      ],
+      "a": "C",
+      "e": "Sensitivity labels with encryption protect content wherever it resides. RLS restricts data access within Power BI but does not encrypt exported files. Intune manages devices, not content encryption.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a table with conditional formatting icons showing which stores are above/near/below monthly quota for returns. You need the table to be accessible to users with color vision deficiency.\n\nWhat should you do?",
+      "o": [
+        "Move conditional formatting icons to a tooltip report.",
+        "Add alt text listing the table values.",
+        "Change the icons to use a different shape for each color.",
+        "Remove icons and use red/yellow/green background colors."
+      ],
+      "a": "C",
+      "e": "Using different shapes for each color ensures users with color vision deficiency can distinguish the categories. Color-only indicators (red/yellow/green) are not accessible to color-blind users.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a workspace with a single-page report named Sales. You need to add all visuals from Sales to a dashboard. Additional visuals added to the page must be added automatically.\n\nDrag the three actions in sequence.",
+      "o": [],
+      "a": "Open Sales report → Select Pin to a dashboard → Pin live page",
+      "t": "dd",
+      "ex": 4,
+      "dd": [
+        "Open the Sales report in Editing view",
+        "With no visuals selected, select Pin to a dashboard",
+        "Select Pin live page to enable auto-sync"
+      ],
+      "e": "Pinning a live report page syncs automatically with the report. When new visuals are added to the report page, they appear on the dashboard without manual re-pinning."
+    },
+    {
+      "q": "You scheduled refresh for a dataset using an on-premises SQL Server database. The refresh fails with authentication errors. What should you configure in the dataset settings?",
+      "a": "A",
+      "o": [
+        "Data source credentials with appropriate authentication method",
+        "Gateway connection",
+        "Scheduled refresh frequency",
+        "Parameter values"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Data source credentials must be configured in the Power BI service for the gateway to authenticate to the on-premises source."
+    },
+    {
+      "q": "You need to change default colors of three visuals to improve accessibility for users with color vision deficiency.\n\nWhich two settings should you configure in Customize theme? (Choose two.)",
+      "o": [
+        "First-level elements colors",
+        "Theme colors",
+        "Divergent colors",
+        "Sentiment colors"
+      ],
+      "a": "BC",
+      "e": "Theme colors allow customizing the palette. Divergent colors specifically address color blindness with accessible color pairs. Sentiment colors use red/green which are problematic for color vision deficiency.",
+      "t": "hs",
+      "ex": 4
+    },
+    {
+      "q": "You are profiling data in Power Query Editor. You need to review the percentage of errors and the maximum value of each column.\n\nDrag the correct option for each requirement.",
+      "o": [],
+      "a": "Column quality | Column profile",
+      "t": "dd",
+      "ex": 4,
+      "dd": [
+        "Column quality — shows percentage of valid, error, and empty values",
+        "Column profile — provides detailed statistics including min/max values"
+      ],
+      "e": "Column Quality shows error percentages at a glance. Column Profile provides detailed statistics for a selected column, including maximum value."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a PBIX file that imports data from a Microsoft Excel data source stored in a file share on a local network. You are notified that the Excel data source was moved to a new location.\n\n▸  QUESTION\n\n  You need to update the PBIX file to use the new location.\n  Which three ways can achieve the goal? Each correct answer presents a complete solution.\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. From the Datasets settings of the Power BI service, configure the data source credentials",
+        "B. From the Data source settings in Power BI Desktop, configure the file path",
+        "C. From Current File in Power BI Desktop, configure the Data Load settings",
+        "D. From Power Query Editor, use the formula bar to configure the file path for the applied step",
+        "E. From Advanced Editor in Power Query Editor, configure the file path in the M code"
+      ],
+      "a": "BDE",
+      "e": "B, D, and E are correct. Data Source Settings in Power BI Desktop allows updating the file path. Power Query Editor formula bar lets you edit the file path in the applied step. Advanced Editor allows you to modify the file path directly in M code. A is about credentials, not file path. C is about data load settings, not file path.",
+      "t": "hs",
+      "ex": 1
+    },
+    {
+      "q": "Your SharePoint site has a document library with manufacturing reports saved as Excel files sharing the same structure. You need to load only those reports into Power BI Desktop. What should you do?",
+      "a": "A",
+      "o": [
+        "Get data from SharePoint folder, enter URL, select Transform, filter by folder path",
+        "Get data from SharePoint list, enter URL, select Combine & Transform, filter by folder path",
+        "Get data from SharePoint folder, enter URL, select Combine & Load",
+        "Get data from SharePoint list, enter URL, select Combine & Load"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "The SharePoint folder connector provides access to files. Using Transform lets you filter before loading. SharePoint list is for structured list data, not files."
+    },
+    {
+      "q": "You have a Power BI semantic model with an Item table containing a Quantity column.\n\n─ REQUIREMENTS ─\n• Rank items by Quantity\n• Do NOT skip ranks when there are ties\n• Show BLANK for the Quantity total when an item is unfiltered",
+      "o": [
+        "RANK.EQ with ALL | HASONEVALUE",
+        "RANK with DENSE | HASONEVALUE",
+        "RANK.EQ with SKIP | HASONEVALUE",
+        "RANK with DENSE | HASONEFILTER"
+      ],
+      "a": "B",
+      "e": "RANK with DENSE ensures tied values get the same rank and no ranks are skipped. HASONEVALUE('Item'[Item]) checks if a single item is selected; if not, it returns BLANK. HASONEFILTER would not work because it returns TRUE even when multiple items are filtered but only one has a value.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You want to understand which factors most influence whether a customer churns. Which AI visual should you add to your report?",
+      "a": "Key Influencer visual,Top N segments",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "Key Influencers identifies the top factors driving a metric. Adding 3 segments shows deep-dives into influencer categories."
+    },
+    {
+      "q": "You are building a Power BI report viewed on mobile devices. You need to display data based on each user's location.\n\nWhich two actions should you perform? (Choose two.)\n\nNOTE: Each correct answer is worth one point.",
+      "o": [
+        "From Power Query Editor, detect the data types of the relevant columns.",
+        "In Data Category, set the geographic data category for the relevant columns.",
+        "Create a hierarchy for columns of the geography data type.",
+        "Use the columns of the geography data type in all visuals.",
+        "For the relevant columns, set synonyms to match common geographical terms."
+      ],
+      "a": "BD",
+      "e": "Setting Data Category to the correct geographic type (City, State, Country) enables Power BI to map locations. Using geography columns in visuals displays data based on location. Geo-filtering in mobile uses these data categories to filter by user location.",
+      "t": "hs",
+      "ex": 3
+    },
+    {
+      "q": "You have two Azure SQL databases with identical Customer tables. You need to combine them into a single table while minimizing model size and supporting scheduled refresh. What should you do?",
+      "a": "Append Queries as New,Disable loading the query to the data model",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "Append Queries as New creates a combined query. Disabling load prevents the intermediate queries from being loaded into the model, saving memory."
+    },
+    {
+      "q": "You need to create a model that combines imported data with DirectQuery sources while supporting many-to-many relationships. What type of model should you create?",
+      "a": "A",
+      "o": [
+        "Composite model",
+        "Import model",
+        "DirectQuery model",
+        "Dual model"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "A Composite model allows mixing Import and DirectQuery sources, supports many-to-many, and enables custom aggregations."
+    },
+    {
+      "q": "You use Power Query Editor to review a Country column. You need to view the percentage of error values and the count of empty values.\n\nWhat should you enable?",
+      "o": [
+        "Column quality for both",
+        "Column profile for both",
+        "Column quality for errors | Column profile for empties",
+        "Column distribution for both"
+      ],
+      "a": "A",
+      "e": "Column Quality provides a visual summary with percentages of valid, error, and empty values for each column. Column Profile gives statistical details (min/max, distinct, unique). Column Distribution shows frequency distribution.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have a CSV file that contains user complaints. The file contains a column named Logged. Logged contains the date and time each complaint occurred. The data in Logged is in the following format: 2018-12-31 at 08:59.\n\n▸  QUESTION\n\n  You need to be able to analyze the complaints by the logged date and use a built-in date hierarchy.\n  What should you do?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Apply the Parse function from the Date transformations options to the Logged column",
+        "B. Change the data type of the Logged column to Date",
+        "C. Split the Logged column by using \"at\" as the delimiter",
+        "D. Create a column by example that starts with 2018-12-31"
+      ],
+      "a": "C",
+      "e": "Split the Logged column by using \"at\" as the delimiter. This separates the date and time into two distinct columns. The date part can then be changed to Date data type, enabling the built-in date hierarchy for analysis by day, month, quarter, etc. The Parse function may not work smoothly due to the non-standard format with \"at\" in the middle.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You use Group By in Power Query on the Category column. You need both the sum of Sales and the count of transactions per category. How do you add the second aggregation?",
+      "a": "D",
+      "o": [
+        "Create a second Group By step",
+        "Use the Advanced option in Group By",
+        "Pivot after Group By",
+        "Add a custom column after Group By"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "The Advanced option in Group By allows adding multiple aggregation columns (sum, count, average, etc.) in one step."
+    },
+    {
+      "q": "You have a Customer table where CustomerID should be unique. You suspect duplicates. Which Power Query feature helps you identify rows with duplicate CustomerID values?",
+      "a": "B",
+      "o": [
+        "Group By",
+        "Remove Duplicates based on CustomerID, then compare row counts",
+        "Column Distribution",
+        "Keep Duplicates"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Use Remove Duplicates on CustomerID; the difference in row count before and after shows how many duplicates existed."
+    },
+    {
+      "q": "When you enable auto date/time in Power BI Desktop, Power BI automatically creates a hidden date table for each date column. What impact does this have on the model?",
+      "a": "Increases model size,Adds time intelligence support,Creates date hierarchies automatically",
+      "o": [],
+      "dd": [],
+      "t": "hs",
+      "answer_explanation": "Auto date/time creates hidden date tables, increasing model size but providing automatic time intelligence and date hierarchies."
+    },
+    {
+      "q": "You want a card visual to display a sales total with $ symbol, commas, and two decimal places. Where should you configure this formatting?",
+      "a": "C",
+      "o": [
+        "Visual level formatting",
+        "Column formatting in the field well",
+        "Measure formatting in the modeling tab",
+        "Page level formatting"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Measure formatting in the Modeling tab sets the default format string (currency, decimals, etc.) for the measure."
+    },
+    {
+      "q": "You are using Power Query Editor to preview a column named Max Temp. Column statistics show a value distribution.\n\n(1) Which value was repeated the most?\n(2) What is the smallest non-null value?",
+      "o": [
+        "45 | 24",
+        "24 | 45",
+        "45 | 0",
+        "24 | 0"
+      ],
+      "a": "A",
+      "e": "The biggest bar in value distribution represents the most frequent value (45). The smallest non-null value shown in column statistics is the minimum actual value (24).",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You need to explore sales data by drilling down through multiple dimensions (Region > Category > Product) with AI-driven explanations. Which visual should you use?",
+      "a": "C",
+      "o": [
+        "Matrix",
+        "Drillthrough page",
+        "Decomposition Tree",
+        "Key Influencers"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Decomposition Tree allows drill-down across dimensions and uses AI to suggest next dimension splits."
+    },
+    {
+      "q": "You have a large FactSales table with five years of data. You need to refresh only the last 30 days while keeping historical data. What should you configure?",
+      "a": "B",
+      "o": [
+        "Scheduled refresh with full refresh",
+        "Incremental refresh in Power BI Desktop",
+        "Partition the table in SQL",
+        "Use DirectQuery"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Incremental refresh loads only new/changed data based on date ranges, reducing refresh time and resource usage."
+    },
+    {
+      "q": "You need to extract key phrases from customer feedback text in Power Query Editor to identify common themes. Which AI Insights function should you use?",
+      "a": "A",
+      "o": [
+        "Key Phrase Extraction",
+        "Sentiment Analysis",
+        "Language Detection",
+        "Text Analytics"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Key Phrase Extraction identifies the main talking points in text, useful for analyzing customer feedback."
+    },
+    {
+      "q": "You build a report to help the sales team understand drivers of sales. The team needs a single visualization to identify which factors affect success.\n\nWhich type of visualization should you use?",
+      "o": [
+        "Key influencers",
+        "Line and clustered column chart",
+        "Q&A",
+        "Funnel chart"
+      ],
+      "a": "A",
+      "e": "The Key Influencers visual analyzes data and ranks factors that drive a selected metric. It displays them as key influencers, showing which factors matter most. This is ideal for understanding drivers of success, such as what influences sales performance.",
+      "t": "mc",
+      "ex": 2
+    },
+    {
+      "q": "You have a Power BI dashboard. You need to ensure that when users view it on a mobile device, it appears optimized as shown in the Mobile exhibit.\n\n─ REQUIREMENTS ─\nSelect the correct options.",
+      "o": [
+        "Update Dashboard Mobile Layout | Resize and move Total Sales and Total Quantity cards",
+        "Update Report Mobile View from Desktop | Recreate all tiles",
+        "Update Dashboard Mobile Layout | Resize all tiles equally",
+        "Update Report Mobile View from Desktop | Resize and move cards"
+      ],
+      "a": "A",
+      "e": "The Dashboard Mobile Layout feature allows optimizing the existing dashboard for mobile by resizing and repositioning tiles. Only the card visuals (Total Sales, Total Quantity) typically need adjustment as other tiles already fit in mobile view.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are modeling data using Power BI. Part of the data model is a large SQL Server table named Order with more than 100 million records.\nDuring development, you need to import a sample of the data.\n\n▸  QUESTION\n\n  Proposed Solution: You add a report-level filter that filters based on the order date.\n  Does this meet the goal?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Yes",
+        "B. No"
+      ],
+      "a": "B",
+      "e": "No. A report-level filter only affects what is displayed, not what is imported. The entire table would still be loaded. Instead, you should add a WHERE clause to the SQL statement to filter at source.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You want to add a horizontal line showing the average sales value across all data points on a line chart. Where should you configure this?",
+      "a": "A",
+      "o": [
+        "Analytics pane",
+        "Format pane",
+        "Visualizations pane",
+        "Modeling pane"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "The Analytics pane provides constant lines, min/max lines, average lines, and forecast for visuals."
+    },
+    {
+      "q": "You have a Power BI app with Report1. You add a new page to Report1. Users must see the new page with minimal administrative effort.\n\nWhat should you do?",
+      "o": [
+        "Update the audience in the app.",
+        "Update the app.",
+        "Update the contact information in the app.",
+        "Unpublish and create a new app."
+      ],
+      "a": "B",
+      "e": "Updating the app publishes the new page without requiring unpublishing or creating a new app. Users see changes automatically. Updating audience controls who sees the app, not what content is visible.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "You have a Power BI report with three pages analyzing sales by country. A Country slicer is on each page.\n\n─ REQUIREMENTS ─\n• Selecting a country on page 1 filters the other pages\n• Pages 2 and 3 display only filtered results\n\nDrag the correct tasks for each requirement.",
+      "o": [],
+      "a": "Sync Country slicer across all pages | Hide Country slicer on pages 2 and 3",
+      "t": "dd",
+      "ex": 3,
+      "dd": [
+        "Configure the Country slicer to sync across all the pages",
+        "Hide the Country slicer on the second and third pages"
+      ],
+      "e": "Syncing the slicer across all pages ensures selections propagate. Hiding the slicer on Pages 2 and 3 keeps them filtered without allowing users on those pages to change the selection, maintaining a clean report design."
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou are creating a Power BI model with a table named Store containing City, State/Province, Country. You plan a map visual with drill-down from Country to State/Province to City.\n\n▸  QUESTION\n\n  What should you do to ensure proper mapping?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Change data type of City, State/Province, and Country",
+        "B. Set Summarization for City, State/Province, and Country to Don't summarize",
+        "C. Set the data category of City, State/Province, and Country",
+        "D. Create a calculated column concatenating the values"
+      ],
+      "a": "C",
+      "e": "Setting the data category (City, State/Province, Country) tells Power BI how to geocode each field for map visualizations. Then create a hierarchy for drill-down from Country to City.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You have a dataset named Pens with columns: Item, Unit Price, Quantity Ordered.\n\n─ REQUIREMENTS ─\nCreate a visualization showing the relationship between Unit Price and Quantity Ordered, highlighting orders with similar price and quantity.",
+      "o": [
+        "Scatter plot of Quantity Ordered and Unit Price by Item | Automatically find clusters",
+        "Line chart of Quantity Ordered by Unit Price | Add a trend line",
+        "Column chart of Unit Price by Item | Add a constant line",
+        "Scatter plot of Unit Price by Item | Add a forecast"
+      ],
+      "a": "A",
+      "e": "A scatter chart shows the relationship between two numerical values. The 'Automatically find clusters' feature groups similar data points, making it easy to identify orders with similar unit price and quantity. Scatter charts are ideal for pattern detection in large datasets.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "You have Report1 (with a line chart named Sales by Month) and Dashboard1. You pin Sales by Month to Dashboard1. You then change the visual to a bar chart in Report1.\n\nHow do you display the bar chart on Dashboard1?",
+      "o": [
+        "Refresh the dataset used by Report1 and Dashboard1.",
+        "Pin the Sales by Month bar chart to Dashboard1.",
+        "Select Refresh visuals for Dashboard1.",
+        "Edit the details for the dashboard tile of Dashboard1."
+      ],
+      "a": "B",
+      "e": "Pinning captures a snapshot. Changing the visual type in the report does not update the pinned tile. You must pin the new bar chart visual to Dashboard1 to update it.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nA business intelligence (BI) developer creates a dataflow in Power BI that uses DirectQuery to access tables from an on-premises Microsoft SQL Server. The Enhanced Dataflows Compute Engine is turned on for the dataflow.\n\n▸  REQUIREMENTS\n\n  • Minimize online processing operations\n  • Minimize calculation times and render times for visuals\n  • Include data from the current year, up to and including the previous day\n\n▸  QUESTION\n\n  You need to use the dataflow in a report. The solution must meet the following requirements:\n  What should you do?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Create a dataflows connection that has DirectQuery mode selected",
+        "B. Create a dataflows connection that has DirectQuery mode selected and configure a gateway connection for the dataset",
+        "C. Create a dataflows connection that has Import mode selected and schedule a daily refresh",
+        "D. Create a dataflows connection that has Import mode selected and create a Microsoft Power Automate solution to refresh the data hourly"
+      ],
+      "a": "C",
+      "e": "A daily update is adequate since data needs to include up to the previous day. Import mode with daily refresh minimizes online processing and render times because data is cached locally. DirectQuery would require online queries for each visual interaction, increasing render times.",
+      "t": "mc",
+      "ex": 1
+    },
+    {
+      "q": "You need to show the composition of total sales across product categories as proportions of a whole. Which chart is best for this?",
+      "a": "A",
+      "o": [
+        "Stacked bar chart",
+        "Clustered bar chart",
+        "Line chart",
+        "Scatter chart"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Stacked bar/column charts show parts of a whole, with each segment representing a category's proportion."
+    },
+    {
+      "q": "You use Power Query Editor. A Region column has blank cells where the value repeats from the first occurrence. You need every row to contain the correct non-blank value with minimal effort.\n\nWhich column and action?",
+      "o": [
+        "Select Region column | Fill Down",
+        "Select Region column | Fill Up",
+        "Select first column | Fill Down",
+        "Select Region column | Replace blanks with 0"
+      ],
+      "a": "A",
+      "e": "Fill Down propagates the last non-blank value downward into subsequent blank cells. This is the standard technique for filling merged or sparse column data in Power Query.",
+      "t": "mc",
+      "ex": 4
+    },
+    {
+      "q": "Your Power Query loads a table that is only used as an intermediate step for another query. How can you optimize performance?",
+      "a": "C",
+      "o": [
+        "Delete the intermediate query",
+        "Enable load for the query",
+        "Disable load for the query",
+        "Use DirectQuery"
+      ],
+      "dd": [],
+      "t": "mc",
+      "answer_explanation": "Disabling load for intermediate queries prevents them from being loaded into the model while still allowing them to be used in transformations."
+    },
+    {
+      "q": "You build a Power BI report displaying IoT temperature data from a refrigerator. You publish to Power BI service.\n\nYou need to be notified when temperature rises above 4°C.\n\nWhat should you do?",
+      "o": [
+        "Set an alert on a KPI visual in the report.",
+        "Pin a card visual to a dashboard and create a subscription.",
+        "Pin a card visual to a dashboard and set an alert on the tile.",
+        "Pin a report page to a dashboard and set an alert on the page."
+      ],
+      "a": "C",
+      "e": "Alerts can only be set on dashboard tiles that display a single value (card, KPI, gauge). First pin a card visual showing temperature to the dashboard, then configure an alert on that tile to trigger when temperature exceeds 4°C.",
+      "t": "mc",
+      "ex": 3
+    },
+    {
+      "q": "──────────────────────────────────────────────────\n\nYou have an Azure SQL database that contains sales transactions. The database is updated frequently.\n\n▸  QUESTION\n\n  You need to generate reports from the data to detect fraudulent transactions. The data must be visible within five minutes of an update.\n  How should you configure the data connection?\n\n──────────────────────────────────────────────────",
+      "o": [
+        "A. Add a SQL statement",
+        "B. Set the Command timeout in minutes setting",
+        "C. Set Data Connectivity mode to Import",
+        "D. Set Data Connectivity mode to DirectQuery"
+      ],
+      "a": "D",
+      "e": "DirectQuery: No data is imported or copied into Power BI. Tables and columns appear in the Fields list, and as you interact with a visualization, Power BI queries the underlying data source, so you're always viewing current data. This meets the requirement of data visibility within five minutes.",
+      "t": "mc",
+      "ex": 1
+    }
+  ]
+}
